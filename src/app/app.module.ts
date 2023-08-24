@@ -9,11 +9,14 @@ import {MatListModule} from "@angular/material/list";
 import {MatButtonModule} from "@angular/material/button";
 import {MatInputModule} from "@angular/material/input";
 import {MatIconModule} from "@angular/material/icon";
+import {FormsModule} from "@angular/forms";
+import {ToDoListItemComponent} from './components/to-do-list-item/to-do-list-item.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ToDoListComponent
+    ToDoListComponent,
+    ToDoListItemComponent
   ],
   imports: [
     BrowserModule,
@@ -22,7 +25,8 @@ import {MatIconModule} from "@angular/material/icon";
     MatListModule,
     MatButtonModule,
     MatInputModule,
-    MatIconModule
+    MatIconModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
