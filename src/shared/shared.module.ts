@@ -8,11 +8,11 @@ import {ButtonComponent} from "./components/button/button.component";
       ButtonComponent,
   ],
   imports: [
-    CommonModule
+    CommonModule,
   ],
   exports: [
       CommonModule,
       ButtonComponent,
-  ]
+  ],
 })
 export class SharedModule { }

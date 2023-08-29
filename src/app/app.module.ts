@@ -30,9 +30,9 @@ import {SharedModule} from "../shared/shared.module";
     MatIconModule,
     FormsModule,
     MatProgressSpinnerModule,
-    SharedModule
+    SharedModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

@@ -8,8 +8,8 @@ import {ToDoListItem} from "../model/toDoListItem";
 })
 export class ToDoListComponent implements OnInit{
   items: ToDoListItem[] = [];
-  itemText: string = "";
-  isLoading: boolean = true;
+  itemText = "";
+  isLoading = true;
 
   ngOnInit(): void {
     setTimeout(() => this.isLoading = false, 500)
@@ -28,7 +28,7 @@ export class ToDoListComponent implements OnInit{
   }
 
   addItem(inputText: string) {
-    let index = this.items.length + 1;
+    const index = this.items.length + 1;
     this.items.push(new ToDoListItem(index, inputText))
     this.itemText = "";
   }
