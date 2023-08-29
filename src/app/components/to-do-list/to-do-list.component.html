@@ -2,26 +2,20 @@
   <mat-card class="to-do-list-card">
     <mat-card-title class="title">ToDo List</mat-card-title>
     <mat-list>
-      <mat-list-item>
-        <span>Buy new laptop</span>
-        <button mat-raised-button>Delete</button>
-      </mat-list-item>
-      <mat-list-item>
-        <span>Complete work tasks</span>
-        <button mat-raised-button>Delete</button>
-      </mat-list-item>
-      <mat-list-item>
-        <span>Create some angular app</span>
-        <button mat-raised-button>Delete</button>
+      <mat-list-item *ngFor="let item of items">
+        <app-to-do-list-item [item]="item" (deleteItemEvent)="deleteItem($event)"></app-to-do-list-item>
       </mat-list-item>
     </mat-list>
 
     <mat-form-field class="form-field">
       <mat-label>Add your new task</mat-label>
-      <input matInput type="text">
-      <button matSuffix mat-icon-button aria-label="Add">
-        <mat-icon>playlist_add</mat-icon>
-      </button>
+      <input class="input" matInput type="text" [(ngModel)]="itemText">
+      <button type="button"
+              class="button button-add"
+              [disabled]="isInputEmpty()"
+              [class.disabled]="isInputEmpty()"
+              (click)="addItem(itemText)"
+      >Add</button>
     </mat-form-field>
 
   </mat-card>

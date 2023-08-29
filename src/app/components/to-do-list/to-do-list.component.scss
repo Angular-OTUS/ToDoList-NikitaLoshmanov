@@ -7,9 +7,9 @@
 }
 
 .to-do-list-card {
-  width: 500px;
-  height: 330px;
-  display: inline-block;
+  min-width: 500px;
+  min-height: 330px;
+  display: flex;
   background: #eee7de;
   box-shadow: 0 0 10px 5px darkgray;
 
@@ -19,30 +19,34 @@
   }
 
   mat-list-item {
-    background: darkgray;
-    width: 90%;
+    background: #c9c4c4;
+    max-width: 90%;
     padding: 10px;
     margin: auto auto 15px;
     border-radius: 5px;
-
-    span {
-      float: left;
-      margin: 5px auto 5px auto;
-    }
-
-    button {
-      float: right;
-    }
+    height: fit-content;
   }
 
   .form-field {
-    display: flex;
     justify-content: center;
     align-items: center;
     width: 90%;
-    margin: auto;
     border-radius: 5px;
+    left:0;
+    right:0;
+    margin-left:auto;
+    margin-right:auto;
+
+    input {
+      max-width: 80%;
+    }
+
   }
 
 }
 
+
+
+.disabled {
+  opacity: 0.5;
+}
