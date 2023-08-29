@@ -11,12 +11,14 @@ import {MatInputModule} from "@angular/material/input";
 import {MatIconModule} from "@angular/material/icon";
 import {FormsModule} from "@angular/forms";
 import {ToDoListItemComponent} from './components/to-do-list-item/to-do-list-item.component';
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import {SharedModule} from "../shared/shared.module";
 
 @NgModule({
   declarations: [
     AppComponent,
     ToDoListComponent,
-    ToDoListItemComponent
+    ToDoListItemComponent,
   ],
   imports: [
     BrowserModule,
@@ -26,7 +28,9 @@ import {ToDoListItemComponent} from './components/to-do-list-item/to-do-list-ite
     MatButtonModule,
     MatInputModule,
     MatIconModule,
-    FormsModule
+    FormsModule,
+    MatProgressSpinnerModule,
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]

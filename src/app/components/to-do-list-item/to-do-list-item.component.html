@@ -1,2 +1,5 @@
 <div class="item-text">{{item?.text}}</div>
-<button type="button" class="button button-delete" (click)="deleteItem(item?.id)">Delete</button>
+<app-button title="Delete"
+                      [styles]="['button', 'button-delete']"
+                      (click)="deleteItem(item?.id)"
+></app-button>

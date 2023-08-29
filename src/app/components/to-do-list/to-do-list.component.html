@@ -1,5 +1,6 @@
 <div class="container">
-  <mat-card class="to-do-list-card">
+  <mat-spinner [class.hide]="!isLoading"></mat-spinner>
+  <mat-card class="to-do-list-card" [class.hide]="isLoading">
     <mat-card-title class="title">ToDo List</mat-card-title>
     <mat-list>
       <mat-list-item *ngFor="let item of items">
@@ -10,12 +11,11 @@
     <mat-form-field class="form-field">
       <mat-label>Add your new task</mat-label>
       <input class="input" matInput type="text" [(ngModel)]="itemText">
-      <button type="button"
-              class="button button-add"
-              [disabled]="isInputEmpty()"
-              [class.disabled]="isInputEmpty()"
-              (click)="addItem(itemText)"
-      >Add</button>
+      <app-button title="Add"
+                            [styles]="['button', 'button-add']"
+                            [isDisabled]="isInputEmpty()"
+                            (click)="addItem(itemText)"
+      ></app-button>
     </mat-form-field>
 
   </mat-card>
