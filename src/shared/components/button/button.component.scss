@@ -1,3 +1,10 @@
+:host {
+  width: 80px;
+  height: 30px;
+  position: relative;
+  margin: auto;
+}
+
 .button {
   font-size: 13pt;
   float: right;
@@ -15,6 +22,9 @@
 
 .button-add {
   background-color: #3aa93a;
+  float: none;
+  display: block;
+  margin-bottom: 20px;
 }
 
 .button-disabled {
