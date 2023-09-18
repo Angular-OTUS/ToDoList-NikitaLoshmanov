@@ -13,12 +13,14 @@ import {FormsModule} from "@angular/forms";
 import {ToDoListItemComponent} from './components/to-do-list-item/to-do-list-item.component';
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {SharedModule} from "../shared/shared.module";
+import {ToastComponent} from './components/toast/toast.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ToDoListComponent,
     ToDoListItemComponent,
+    ToastComponent,
   ],
   imports: [
     BrowserModule,

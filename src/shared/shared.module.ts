@@ -19,6 +19,7 @@ import {TooltipComponent} from './components/tooltip/tooltip.component';
       ButtonComponent,
       TooltipComponent,
       TooltipDirective,
+      TooltipComponent,
   ],
 })
 export class SharedModule { }
