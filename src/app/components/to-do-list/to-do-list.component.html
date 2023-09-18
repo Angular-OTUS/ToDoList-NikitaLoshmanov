@@ -20,7 +20,7 @@
           <app-button title="Save"
                       [styles]="['button', 'button-update']"
                       (click)="updateItem(item.id, item.text)"
-                      [appTooltip]="'Update task'"
+                      [tooltipMessage]="'Update task'"
           ></app-button>
         </mat-form-field>
       </ng-container>
@@ -39,11 +39,11 @@
               [styles]="['button', 'button-add']"
               [isDisabled]="isInputEmpty()"
               (click)="addItem(itemText, itemDescription); showInfoToast('INFO', 'New element was added')"
-              [appTooltip]="'Add new task'"
+              [tooltipMessage]="'Add new task'"
   ></app-button>
 </mat-card>
 <mat-card class="description" [class.hide]="!selectedItemId">
-  <button (click)="clearSelection()"
+  <button matTooltip="Close description" (click)="clearSelection()"
   ><mat-icon>close</mat-icon></button>
   <mat-card-content *ngIf="getItem(selectedItemId) as value" >{{value.description}}</mat-card-content>
 </mat-card>
