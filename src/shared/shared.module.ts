@@ -1,15 +1,15 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {ButtonComponent} from "./components/button/button.component";
-import {TooltipDirective} from './directive/tooltip.directive';
-import {TooltipComponent} from './components/tooltip/tooltip.component';
+import {CustomTooltipDirective} from './directive/custom-tooltip.directive';
+import {CustomTooltipComponent} from './components/tooltip/custom-tooltip.component';
 
 
 @NgModule({
   declarations: [
       ButtonComponent,
-      TooltipDirective,
-      TooltipComponent,
+      CustomTooltipDirective,
+      CustomTooltipComponent,
   ],
   imports: [
     CommonModule,
@@ -17,8 +17,8 @@ import {TooltipComponent} from './components/tooltip/tooltip.component';
   exports: [
       CommonModule,
       ButtonComponent,
-      TooltipComponent,
-      TooltipDirective,
+      CustomTooltipComponent,
+      CustomTooltipDirective,
   ],
 })
 export class SharedModule { }
