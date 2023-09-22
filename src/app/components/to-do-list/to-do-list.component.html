@@ -5,11 +5,11 @@
 
     <mat-list-item class="item"
                    *ngFor="let item of getItems()"
-                   (click)="selectItem(item.id)"
                    (dblclick)="editItem(item)"
                    [ngClass]="{ 'selected': item.id === selectedItemId}">
       <ng-container *ngIf="!editingItem || editingItem !== item">
         <app-to-do-list-item
+          (click)="selectItem(item.id)"
           [item]="item"
           (deleteItemEvent)="deleteItem($event)"
         ></app-to-do-list-item>
@@ -19,7 +19,7 @@
           <input class="input" matInput type="text" [(ngModel)]="item.text">
           <app-button title="Save"
                       [styles]="['button', 'button-update']"
-                      (click)="updateItem(item.id, item.text)"
+                      (click)="updateItem(item.id, item.text); showInfoToast('INFO', 'Task was updated')"
                       [tooltipMessage]="'Update task'"
           ></app-button>
         </mat-form-field>
@@ -38,7 +38,7 @@
   <app-button title="Add"
               [styles]="['button', 'button-add']"
               [isDisabled]="isInputEmpty()"
-              (click)="addItem(itemText, itemDescription); showInfoToast('INFO', 'New element was added')"
+              (click)="addItem(itemText, itemDescription); showInfoToast('INFO', 'New task was added')"
               [tooltipMessage]="'Add new task'"
   ></app-button>
 </mat-card>

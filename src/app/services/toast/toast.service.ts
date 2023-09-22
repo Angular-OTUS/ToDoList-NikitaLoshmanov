@@ -17,6 +17,7 @@ export class ToastService {
   }
 
   remove(toast: Toast) {
+    toast.visible = false;
     this.toasts = this.toasts.filter(t => t !== toast);
   }
 

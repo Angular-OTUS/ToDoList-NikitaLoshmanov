@@ -11,7 +11,7 @@ export class ToastComponent implements DoCheck {
   toasts: Toast[] = [];
 
   public close(toast: Toast) {
-    toast.visible = false;
+    this.toastService.remove(toast);
   }
 
   constructor(
