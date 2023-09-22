@@ -6,6 +6,7 @@
     <mat-list-item class="item"
                    *ngFor="let item of items"
                    (click)="selectItem(item.id)"
+                   [appTooltip]="'Click to see description'"
                    [ngClass]="{ 'selected': item.id === selectedItemId}">
       <app-to-do-list-item  [item]="item"
                            (deleteItemEvent)="deleteItem($event)"
