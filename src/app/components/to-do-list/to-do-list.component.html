@@ -6,7 +6,6 @@
     <mat-list-item class="item"
                    *ngFor="let item of getItems()"
                    (click)="selectItem(item.id)"
-                   [appTooltip]="'Click to see description'"
                    (dblclick)="editItem(item)"
                    [ngClass]="{ 'selected': item.id === selectedItemId}">
       <ng-container *ngIf="!editingItem || editingItem !== item">
