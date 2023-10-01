@@ -1,34 +1,42 @@
 import {Injectable} from '@angular/core';
 import {ToDoListItem} from "../../model/toDoListItem";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root',
 })
 export class ToDoListDataService {
-  private items: ToDoListItem[] = [];
+  private itemsUrl = 'http://localhost:3000/tasks';
 
-  setData(items: ToDoListItem[]) {
-    this.items = items;
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+  };
+
+  constructor(
+    private http: HttpClient) {}
+
+  getItems(): Observable<ToDoListItem[]> {
+    return this.http.get<ToDoListItem[]>(this.itemsUrl);
   }
 
-  getData(): ToDoListItem[] {
-    return this.items;
+  addItem(item: ToDoListItem): Observable<ToDoListItem> {
+    return this.http.post<ToDoListItem>(this.itemsUrl, item, this.httpOptions);
   }
 
-  addItem(item: ToDoListItem) {
-    this.items.push(item);
+  deleteItem(id: number): Observable<ToDoListItem> {
+    const url = `${this.itemsUrl}/${id}`;
+    return this.http.delete<ToDoListItem>(url, this.httpOptions);
   }
 
-  deleteItem(id: number) {
-    this.items.filter((value, index, array) => {
-      if (value.id === id) {
-        array.splice(index, 1);
-      }
-    })
+  getItemById(id: number): Observable<ToDoListItem> {
+    const url = `${this.itemsUrl}/${id}`;
+    return this.http.get<ToDoListItem>(url, this.httpOptions);
   }
 
-  getItem(id: number | null): ToDoListItem | undefined {
-    return this.items.find(item => item.id === id);
+  updateItem(item: ToDoListItem): Observable<ToDoListItem> {
+    const url = `${this.itemsUrl}/${item.id}`;
+    return this.http.put<ToDoListItem>(url, item, this.httpOptions);
   }
 
 }

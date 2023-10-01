@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ToDoListItem} from "../../model/toDoListItem";
 import {ToDoListDataService} from "../../services/toDoListData/to-do-list-data.service";
 import {ToastService} from "../../services/toast/toast.service";
+import {Status} from "../../model/status";
 
 @Component({
   selector: 'app-to-do-list',
@@ -9,12 +10,15 @@ import {ToastService} from "../../services/toast/toast.service";
   styleUrls: ['./to-do-list.component.scss'],
 })
 export class ToDoListComponent implements OnInit {
-  itemText = "";
-  itemDescription = "";
+  items: ToDoListItem[] = [];
+  item!: ToDoListItem;
   isLoading = true;
-  selectedItemId: number | null = null;
+  selectedItem: ToDoListItem | null = null;
   editingItem: ToDoListItem | undefined;
   editedItem: ToDoListItem | undefined
+  selectedFilter: Status | null = null;
+
+  protected readonly Status = Status;
 
   constructor(
     private toDoListDataService: ToDoListDataService,
@@ -23,38 +27,42 @@ export class ToDoListComponent implements OnInit {
 
   ngOnInit(): void {
     setTimeout(() => this.isLoading = false, 500)
+    this.getItems();
   }
 
   showInfoToast(title: string, message: string) {
     this.toastService.show(title, message);
   }
 
-  isInputEmpty(): boolean {
-    return !this.itemText;
+  clearSelection() {
+    this.selectedItem = null;
   }
 
-  clearSelection() {
-    this.selectedItemId = null;
+  addItem(item: ToDoListItem) {
+    this.toDoListDataService.addItem(item)
+      .subscribe({
+        next: (v) => this.item = v,
+        error: (e) => console.log(e),
+        complete: () => this.items.push(this.item),
+      });
   }
 
   deleteItem(id: number) {
-    this.toDoListDataService.deleteItem(id);
+    this.toDoListDataService.deleteItem(id)
+      .subscribe({
+        next: (v) => this.item = v,
+        error: (e) => console.log(e),
+        complete: () => this.getItems(),
+      });
   }
 
-  getItem(id: number | null): ToDoListItem | undefined {
-    return this.toDoListDataService.getItem(id);
+  getItemById(id: number) {
+    this.toDoListDataService.getItemById(id)
+      .subscribe(item => this.item = item);
   }
 
-  selectItem(id: number) {
-    this.selectedItemId = id;
-  }
-
-  addItem(inputText: string, description: string) {
-    const index = this.toDoListDataService.getData().length + 1;
-    const item: ToDoListItem = new ToDoListItem(index, inputText, description)
-    this.toDoListDataService.addItem(item);
-    this.itemText = "";
-    this.itemDescription = "";
+  selectItem(item: ToDoListItem) {
+    this.selectedItem = item;
   }
 
   editItem(item: ToDoListItem) {
@@ -63,16 +71,35 @@ export class ToDoListComponent implements OnInit {
   }
 
   updateItem(id: number, inputText: string) {
-    const updatedItem = this.getItem(id);
-    if (updatedItem) {
-      updatedItem.text = inputText;
+    const foundItem = this.items.find(item => item.id === id);
+    if (foundItem) {
+      foundItem.text = inputText;
+      this.toDoListDataService.updateItem(foundItem)
+        .subscribe({
+          next: (v) => this.item = v,
+          error: (e) => console.log(e),
+          complete: () => this.getItems(),
+        });
     }
     this.editingItem = undefined;
     this.editedItem = undefined;
   }
 
-  getItems(): ToDoListItem[] {
-    return this.toDoListDataService.getData();
+  changeStatus(id: number) {
+    this.toDoListDataService.getItemById(id)
+      .subscribe({
+          next: (v) =>  {
+            v.status = v.status === Status.COMPLETED ? Status.IN_PROGRESS : Status.COMPLETED;
+            this.toDoListDataService.updateItem(v).subscribe(updated => this.item = updated);
+          },
+          error: (e) => console.log(e),
+          complete: () => this.getItems(),
+        },
+      );
+  }
+
+  getItems() {
+    this.toDoListDataService.getItems().subscribe(items => this.items = items);
   }
 
 }

@@ -15,6 +15,12 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {SharedModule} from "../shared/shared.module";
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {ToastComponent} from './components/toast/toast.component';
+import {MatCheckboxModule} from "@angular/material/checkbox";
+import {MatChipsModule} from "@angular/material/chips";
+import {FilterItemsPipe} from './pipes/filter-items/filter-items.pipe';
+import {MatButtonToggleModule} from "@angular/material/button-toggle";
+import {TodoCreateItemComponent} from './components/todo-create-item/todo-create-item.component';
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -22,6 +28,8 @@ import {ToastComponent} from './components/toast/toast.component';
     ToDoListComponent,
     ToDoListItemComponent,
     ToastComponent,
+    FilterItemsPipe,
+    TodoCreateItemComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,6 +43,11 @@ import {ToastComponent} from './components/toast/toast.component';
     MatProgressSpinnerModule,
     SharedModule,
     MatTooltipModule,
+    MatCheckboxModule,
+    MatChipsModule,
+    MatButtonToggleModule,
+    FormsModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
