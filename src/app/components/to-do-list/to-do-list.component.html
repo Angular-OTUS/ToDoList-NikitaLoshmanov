@@ -4,12 +4,26 @@
   <mat-list>
 
     <mat-list-item class="item"
-                   *ngFor="let item of items"
-                   (click)="selectItem(item.id)"
+                   *ngFor="let item of getItems()"
+                   (dblclick)="editItem(item)"
                    [ngClass]="{ 'selected': item.id === selectedItemId}">
-      <app-to-do-list-item  [item]="item"
-                           (deleteItemEvent)="deleteItem($event)"
-      ></app-to-do-list-item>
+      <ng-container *ngIf="!editingItem || editingItem !== item">
+        <app-to-do-list-item
+          (click)="selectItem(item.id)"
+          [item]="item"
+          (deleteItemEvent)="deleteItem($event)"
+        ></app-to-do-list-item>
+      </ng-container>
+      <ng-container *ngIf="editingItem === item">
+        <mat-form-field class="form-field">
+          <input class="input" matInput type="text" [(ngModel)]="item.text">
+          <app-button title="Save"
+                      [styles]="['button', 'button-update']"
+                      (click)="updateItem(item.id, item.text); showInfoToast('INFO', 'Task was updated')"
+                      [tooltipMessage]="'Update task'"
+          ></app-button>
+        </mat-form-field>
+      </ng-container>
     </mat-list-item>
   </mat-list>
 
@@ -24,7 +38,7 @@
   <app-button title="Add"
               [styles]="['button', 'button-add']"
               [isDisabled]="isInputEmpty()"
-              (click)="addItem(itemText, itemDescription)"
+              (click)="addItem(itemText, itemDescription); showInfoToast('INFO', 'New task was added')"
               [tooltipMessage]="'Add new task'"
   ></app-button>
 </mat-card>

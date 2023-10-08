@@ -1,0 +1,17 @@
+<div *ngFor="let toast of toasts">
+  <ng-container *ngIf="toast?.visible">
+    <div class="toast" [ngClass]="toast.position">
+      <div class="toast-grid">
+
+        <div class="title">{{toast.title}}</div>
+        <div class="message">{{toast.message}}</div>
+
+        <button class="btn-close flexbox-center" (click)="close(toast)">
+          <mat-icon >close</mat-icon>
+        </button>
+      </div>
+    </div>
+  </ng-container>
+</div>
+
+

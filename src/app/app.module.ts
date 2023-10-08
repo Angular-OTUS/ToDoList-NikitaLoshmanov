@@ -14,12 +14,14 @@ import {ToDoListItemComponent} from './components/to-do-list-item/to-do-list-ite
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {SharedModule} from "../shared/shared.module";
 import {MatTooltipModule} from "@angular/material/tooltip";
+import {ToastComponent} from './components/toast/toast.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ToDoListComponent,
     ToDoListItemComponent,
+    ToastComponent,
   ],
   imports: [
     BrowserModule,

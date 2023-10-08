@@ -1,6 +1,6 @@
 <div class="item-text" [appTooltip]="'Click to see description'">{{item?.text}}</div>
 <app-button title="Delete"
                       [styles]="['button', 'button-delete']"
-                      (click)="deleteItem(item?.id)"
+                      (click)="deleteItem(item?.id); showInfoToast('INFO', 'Task was deleted')"
                       [tooltipMessage]="'Delete task'"
 ></app-button>
