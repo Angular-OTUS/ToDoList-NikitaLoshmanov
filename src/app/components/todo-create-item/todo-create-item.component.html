@@ -8,7 +8,7 @@
     <input class="input form-control" id="itemDescription" type="text" [(ngModel)]="itemDescription" name="itemDescription">
   </div>
   <app-button [styles]="['button', 'button-add']"
-              (click)="newItem(); showInfoToast('INFO', 'New task was added'); itemForm.reset()"
+              (click)="newItem(); itemForm.reset()"
               [tooltipMessage]="'Add new task'"
               [isDisabled]="itemForm.form.invalid">Add</app-button>
 </form>

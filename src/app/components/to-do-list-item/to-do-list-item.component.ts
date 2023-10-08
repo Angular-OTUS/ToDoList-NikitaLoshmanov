@@ -23,6 +23,7 @@ export class ToDoListItemComponent implements OnInit{
 
   deleteItem(id?: number) {
     this.deleteItemEvent.emit(id);
+    this.showInfoToast('INFO', 'Task was deleted')
   }
 
   selectItem(item: ToDoListItem) {

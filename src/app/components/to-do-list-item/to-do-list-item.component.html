@@ -8,7 +8,7 @@
     {{item.text}}
   </div>
   <app-button [styles]="['button', 'button-delete']"
-              (click)="deleteItem(item.id); showInfoToast('INFO', 'Task was deleted')"
+              (click)="deleteItem(item.id)"
               [tooltipMessage]="'Delete task'"
   >Delete</app-button>
 

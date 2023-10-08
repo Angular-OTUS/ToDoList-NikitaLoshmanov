@@ -26,7 +26,7 @@
         <mat-form-field class="form-field">
           <input class="input" matInput type="text" [(ngModel)]="item.text">
           <app-button [styles]="['button', 'button-update']"
-                      (click)="updateItem(item.id, item.text); showInfoToast('INFO', 'Task was updated')"
+                      (click)="updateItem(item.id, item.text)"
                       [tooltipMessage]="'Update task'"
           >Save</app-button>
         </mat-form-field>
@@ -34,7 +34,7 @@
     </mat-list-item>
   </mat-list>
 
-  <app-todo-create-item [index]="items.length + 1"
+  <app-todo-create-item [index]="getLastId() + 1"
                         (save)="addItem($event)"
   >
   </app-todo-create-item>

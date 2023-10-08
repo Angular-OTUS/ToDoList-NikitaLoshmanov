@@ -83,6 +83,7 @@ export class ToDoListComponent implements OnInit {
     }
     this.editingItem = undefined;
     this.editedItem = undefined;
+    this.showInfoToast('INFO', 'Task was updated');
   }
 
   changeStatus(id: number) {
@@ -100,6 +101,15 @@ export class ToDoListComponent implements OnInit {
 
   getItems() {
     this.toDoListDataService.getItems().subscribe(items => this.items = items);
+  }
+
+  getLastId(): number {
+    const lastItem = this.items.find(item => item.id === Math.max(...this.items.map(it => it.id)));
+    if (lastItem) {
+      return lastItem.id
+    } else {
+      return 0;
+    }
   }
 
 }

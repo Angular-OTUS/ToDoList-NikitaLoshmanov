@@ -1,4 +1,4 @@
-import {Component, DoCheck} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Toast} from "../../model/toast";
 import {ToastService} from "../../services/toast/toast.service";
 
@@ -7,19 +7,21 @@ import {ToastService} from "../../services/toast/toast.service";
   templateUrl: './toast.component.html',
   styleUrls: ['./toast.component.scss'],
 })
-export class ToastComponent implements DoCheck {
-  toasts: Toast[] = [];
+export class ToastComponent implements OnInit {
+  toast: Toast | undefined;
 
   public close(toast: Toast) {
-    this.toastService.remove(toast);
+    this.toastService.hide(toast);
   }
 
   constructor(
     private toastService: ToastService,
   ) {}
 
-  ngDoCheck(): void {
-    this.toasts = this.toastService.getToasts()
+  ngOnInit(): void {
+    this.toastService.getToast().subscribe((toast) => {
+      this.toast = toast;
+    });
   }
 
 }

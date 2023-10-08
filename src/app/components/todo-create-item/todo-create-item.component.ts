@@ -21,6 +21,7 @@ export class TodoCreateItemComponent {
   newItem() {
     if (this.index) {
       this.save.emit(new ToDoListItem(this.index, this.itemText, this.itemDescription, Status.IN_PROGRESS));
+      this.showInfoToast('INFO', 'New task was added')
     }
   }
 
