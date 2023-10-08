@@ -13,6 +13,7 @@ import {FormsModule} from "@angular/forms";
 import {ToDoListItemComponent} from './components/to-do-list-item/to-do-list-item.component';
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {SharedModule} from "../shared/shared.module";
+import {MatTooltipModule} from "@angular/material/tooltip";
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import {SharedModule} from "../shared/shared.module";
     FormsModule,
     MatProgressSpinnerModule,
     SharedModule,
+    MatTooltipModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

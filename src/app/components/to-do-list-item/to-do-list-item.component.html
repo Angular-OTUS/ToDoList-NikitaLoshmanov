@@ -1,5 +1,6 @@
-<div class="item-text">{{item?.text}}</div>
+<div class="item-text" [appTooltip]="'Click to see description'">{{item?.text}}</div>
 <app-button title="Delete"
                       [styles]="['button', 'button-delete']"
                       (click)="deleteItem(item?.id)"
+                      [tooltipMessage]="'Delete task'"
 ></app-button>

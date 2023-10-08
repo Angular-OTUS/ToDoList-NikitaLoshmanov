@@ -1,24 +1,37 @@
-<div class="container">
-  <mat-spinner [class.hide]="!isLoading"></mat-spinner>
-  <mat-card class="to-do-list-card" [class.hide]="isLoading">
-    <mat-card-title class="title">ToDo List</mat-card-title>
-    <mat-list>
-      <mat-list-item *ngFor="let item of items">
-        <app-to-do-list-item [item]="item" (deleteItemEvent)="deleteItem($event)"></app-to-do-list-item>
-      </mat-list-item>
-    </mat-list>
+<mat-spinner [class.hide]="!isLoading"></mat-spinner>
+<mat-card class="to-do-list-card" [class.hide]="isLoading">
+  <mat-card-title class="title">ToDo List</mat-card-title>
+  <mat-list>
 
-    <mat-form-field class="form-field">
-      <mat-label>Add your new task</mat-label>
-      <input class="input" matInput type="text" [(ngModel)]="itemText">
-      <app-button title="Add"
-                            [styles]="['button', 'button-add']"
-                            [isDisabled]="isInputEmpty()"
-                            (click)="addItem(itemText)"
-      ></app-button>
-    </mat-form-field>
+    <mat-list-item class="item"
+                   *ngFor="let item of items"
+                   (click)="selectItem(item.id)"
+                   [ngClass]="{ 'selected': item.id === selectedItemId}">
+      <app-to-do-list-item  [item]="item"
+                           (deleteItemEvent)="deleteItem($event)"
+      ></app-to-do-list-item>
+    </mat-list-item>
+  </mat-list>
 
-  </mat-card>
-</div>
+  <mat-form-field class="form-field">
+    <mat-label>Add your new task</mat-label>
+    <input class="input" matInput type="text" [(ngModel)]="itemText">
+  </mat-form-field>
+  <mat-form-field class="form-field">
+    <mat-label>Description</mat-label>
+    <textarea matInput [(ngModel)]="itemDescription"></textarea>
+  </mat-form-field>
+  <app-button title="Add"
+              [styles]="['button', 'button-add']"
+              [isDisabled]="isInputEmpty()"
+              (click)="addItem(itemText, itemDescription)"
+              [tooltipMessage]="'Add new task'"
+  ></app-button>
+</mat-card>
+<mat-card class="description" [class.hide]="!selectedItemId">
+  <button matTooltip="Close description" (click)="clearSelection()"
+  ><mat-icon>close</mat-icon></button>
+  <mat-card-content *ngIf="getItem(selectedItemId) as value" >{{value.description}}</mat-card-content>
+</mat-card>
 
 

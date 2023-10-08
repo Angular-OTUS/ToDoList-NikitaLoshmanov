@@ -10,4 +10,5 @@ export class ButtonComponent {
   @Input() isDisabled = false;
   @Input() styles: string[] = [];
   @Input() type = "button";
+  @Input() tooltipMessage = "";
 }
