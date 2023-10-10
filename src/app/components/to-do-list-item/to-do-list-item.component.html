@@ -4,7 +4,7 @@
   >
   </mat-checkbox>
   <div class="item-text" [appTooltip]="'Click to see description'"
-       (click)="selectItem(item)">
+       (click)="goToItemView(item)">
     {{item.text}}
   </div>
   <app-button [styles]="['button', 'button-delete']"

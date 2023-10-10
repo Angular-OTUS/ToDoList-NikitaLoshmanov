@@ -21,6 +21,8 @@ import {FilterItemsPipe} from './pipes/filter-items/filter-items.pipe';
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
 import {TodoCreateItemComponent} from './components/todo-create-item/todo-create-item.component';
 import {HttpClientModule} from "@angular/common/http";
+import {AppRoutingModule} from "./app-routing.module";
+import {ToDoListItemViewComponent} from './components/to-do-list-item-view/to-do-list-item-view.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +32,7 @@ import {HttpClientModule} from "@angular/common/http";
     ToastComponent,
     FilterItemsPipe,
     TodoCreateItemComponent,
+    ToDoListItemViewComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,6 +51,7 @@ import {HttpClientModule} from "@angular/common/http";
     MatButtonToggleModule,
     FormsModule,
     HttpClientModule,
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ToDoListItem} from "../../model/toDoListItem";
 import {ToastService} from "../../services/toast/toast.service";
 import {Status} from "../../model/status";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-to-do-list-item',
@@ -12,22 +13,24 @@ export class ToDoListItemComponent implements OnInit{
   @Input() item?: ToDoListItem;
   @Output() deleteItemEvent = new EventEmitter<number>();
   @Output() changeStatusEvent = new EventEmitter<number>();
-  @Output() selectItemEvent = new EventEmitter<ToDoListItem>();
   checked: boolean | undefined;
 
 
   constructor(
     private toastService: ToastService,
+    private router: Router,
+    private route: ActivatedRoute,
   ) {}
-
 
   deleteItem(id?: number) {
     this.deleteItemEvent.emit(id);
     this.showInfoToast('INFO', 'Task was deleted')
   }
 
-  selectItem(item: ToDoListItem) {
-    this.selectItemEvent.emit(item);
+  goToItemView(item: ToDoListItem) {
+    this.router.navigate([item.id], {
+      relativeTo: this.route,
+    });
   }
 
   showInfoToast(title: string, message: string) {

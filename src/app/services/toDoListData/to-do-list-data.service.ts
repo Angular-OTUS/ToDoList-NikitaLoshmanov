@@ -20,6 +20,15 @@ export class ToDoListDataService {
     return this.http.get<ToDoListItem[]>(this.itemsUrl);
   }
 
+  getLastId(): number {
+    let lastItem: ToDoListItem | undefined;
+    this.http.get<ToDoListItem[]>(this.itemsUrl)
+      .subscribe(items => {
+        lastItem = items.find(item => item.id === Math.max(...items.map(it => it.id)))
+      });
+    return lastItem ? lastItem.id : 0;
+  }
+
   addItem(item: ToDoListItem): Observable<ToDoListItem> {
     return this.http.post<ToDoListItem>(this.itemsUrl, item, this.httpOptions);
   }

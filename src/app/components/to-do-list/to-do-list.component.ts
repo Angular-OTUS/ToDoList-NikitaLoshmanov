@@ -10,12 +10,12 @@ import {Status} from "../../model/status";
   styleUrls: ['./to-do-list.component.scss'],
 })
 export class ToDoListComponent implements OnInit {
-  items: ToDoListItem[] = [];
+  items!: ToDoListItem[];
   item!: ToDoListItem;
   isLoading = true;
-  selectedItem: ToDoListItem | null = null;
+  selectedId: number | null = null;
   editingItem: ToDoListItem | undefined;
-  editedItem: ToDoListItem | undefined
+  editedItem: ToDoListItem | undefined;
   selectedFilter: Status | null = null;
 
   protected readonly Status = Status;
@@ -26,6 +26,7 @@ export class ToDoListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    console.log('Init toDoList component')
     setTimeout(() => this.isLoading = false, 500)
     this.getItems();
   }
@@ -34,16 +35,12 @@ export class ToDoListComponent implements OnInit {
     this.toastService.show(title, message);
   }
 
-  clearSelection() {
-    this.selectedItem = null;
-  }
-
   addItem(item: ToDoListItem) {
     this.toDoListDataService.addItem(item)
       .subscribe({
         next: (v) => this.item = v,
         error: (e) => console.log(e),
-        complete: () => this.items.push(this.item),
+        complete: () => this.getItems(),
       });
   }
 
@@ -56,31 +53,18 @@ export class ToDoListComponent implements OnInit {
       });
   }
 
-  getItemById(id: number) {
-    this.toDoListDataService.getItemById(id)
-      .subscribe(item => this.item = item);
-  }
-
-  selectItem(item: ToDoListItem) {
-    this.selectedItem = item;
-  }
-
   editItem(item: ToDoListItem) {
     this.editingItem = item;
     this.editedItem = item;
   }
 
-  updateItem(id: number, inputText: string) {
-    const foundItem = this.items.find(item => item.id === id);
-    if (foundItem) {
-      foundItem.text = inputText;
-      this.toDoListDataService.updateItem(foundItem)
-        .subscribe({
-          next: (v) => this.item = v,
-          error: (e) => console.log(e),
-          complete: () => this.getItems(),
-        });
-    }
+  updateItem(item: ToDoListItem) {
+    this.toDoListDataService.updateItem(item)
+      .subscribe({
+        next: (v) => this.item = v,
+        error: (e) => console.log(e),
+        complete: () => this.getItems(),
+      });
     this.editingItem = undefined;
     this.editedItem = undefined;
     this.showInfoToast('INFO', 'Task was updated');
@@ -100,16 +84,13 @@ export class ToDoListComponent implements OnInit {
   }
 
   getItems() {
-    this.toDoListDataService.getItems().subscribe(items => this.items = items);
+    this.toDoListDataService.getItems()
+      .subscribe(items => this.items = items);
   }
 
   getLastId(): number {
-    const lastItem = this.items.find(item => item.id === Math.max(...this.items.map(it => it.id)));
-    if (lastItem) {
-      return lastItem.id
-    } else {
-      return 0;
-    }
+    const lastItem = this.items.find(item => item.id === Math.max(...this.items.map(it => it.id)))
+    return lastItem ? lastItem.id : 0;
   }
 
 }
