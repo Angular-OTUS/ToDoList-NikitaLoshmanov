@@ -3,6 +3,8 @@ import {ToDoListItem} from "../../model/toDoListItem";
 import {ToDoListDataService} from "../../services/toDoListData/to-do-list-data.service";
 import {ToastService} from "../../services/toast/toast.service";
 import {Status} from "../../model/status";
+import {ActivatedRoute, Route, Router} from "@angular/router";
+import {tap} from "rxjs";
 
 @Component({
   selector: 'app-to-do-list',
@@ -24,7 +26,10 @@ export class ToDoListComponent implements OnInit {
   constructor(
     private toDoListDataService: ToDoListDataService,
     private toastService: ToastService,
-  ) {}
+    private route: ActivatedRoute
+  ) {
+    route.params.pipe(tap(p => console.log('removeSelection', p))).subscribe()
+  }
 
   ngOnInit(): void {
     console.log('Init toDoList component')

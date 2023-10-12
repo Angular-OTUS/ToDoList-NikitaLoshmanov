@@ -28,9 +28,7 @@ export class ToDoListItemComponent implements OnInit{
   }
 
   goToItemView(item: ToDoListItem) {
-    this.router.navigate([item.id], {
-      relativeTo: this.route,
-    });
+    this.router.navigate(['/tasks', item.id] );
   }
 
   showInfoToast(title: string, message: string) {
