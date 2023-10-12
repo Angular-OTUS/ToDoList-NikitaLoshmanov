@@ -15,6 +15,7 @@ export class ToDoListComponent implements OnInit {
   isLoading = true;
   selectedId: number | null = null;
   editingItem: ToDoListItem | undefined;
+  // koshelnikov: не понятная переменная
   editedItem: ToDoListItem | undefined;
   selectedFilter: Status | null = null;
 
@@ -27,6 +28,7 @@ export class ToDoListComponent implements OnInit {
 
   ngOnInit(): void {
     console.log('Init toDoList component')
+    // koshelnikov: для чего этот кусок кода?
     setTimeout(() => this.isLoading = false, 500)
     this.getItems();
   }
@@ -53,6 +55,7 @@ export class ToDoListComponent implements OnInit {
       });
   }
 
+  // koshelnikov: rename setEditItem
   editItem(item: ToDoListItem) {
     this.editingItem = item;
     this.editedItem = item;
