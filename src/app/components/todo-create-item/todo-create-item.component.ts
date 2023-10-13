@@ -19,9 +19,12 @@ export class TodoCreateItemComponent {
   ) {}
 
   newItem() {
+    console.log('index: ', this.index)
     if (this.index) {
       this.save.emit(new ToDoListItem(this.index, this.itemText, this.itemDescription, Status.IN_PROGRESS));
       this.showInfoToast('INFO', 'New task was added')
+    } else {
+      console.error("Next ID undefined")
     }
   }
 

@@ -3,6 +3,9 @@ import {ToDoListItem} from "../../model/toDoListItem";
 import {ToDoListDataService} from "../../services/toDoListData/to-do-list-data.service";
 import {ToastService} from "../../services/toast/toast.service";
 import {Status} from "../../model/status";
+import {Observable, tap} from "rxjs";
+import {ActivatedRoute} from "@angular/router";
+import {PathParamSharedService} from "../../services/shared/pathParam/path-param-shared.service";
 
 @Component({
   selector: 'app-to-do-list',
@@ -10,25 +13,40 @@ import {Status} from "../../model/status";
   styleUrls: ['./to-do-list.component.scss'],
 })
 export class ToDoListComponent implements OnInit {
-  items!: ToDoListItem[];
-  item!: ToDoListItem;
+  items$: Observable<ToDoListItem[]> | undefined;
+  nextId = 0;
   isLoading = true;
-  selectedId: number | null = null;
-  editingItem: ToDoListItem | undefined;
-  editedItem: ToDoListItem | undefined;
   selectedFilter: Status | null = null;
+  selectedId: number | null = null;
 
   protected readonly Status = Status;
 
   constructor(
     private toDoListDataService: ToDoListDataService,
     private toastService: ToastService,
-  ) {}
+    private pathParamService: PathParamSharedService,
+    private route: ActivatedRoute,
+  ) {
+    this.route.params.pipe(tap(p => {
+      if (+p['id'] === this.selectedId) {
+        this.selectedId = null;
+      }
+    })).subscribe()
+  }
 
   ngOnInit(): void {
-    console.log('Init toDoList component')
     setTimeout(() => this.isLoading = false, 500)
-    this.getItems();
+    this.items$ = this.getItems();
+
+    this.items$.subscribe(items => {
+        const lastItem = items.find(item => item.id === Math.max(...items.map(item => item.id)));
+        if (lastItem) {
+          this.nextId = lastItem.id + 1;
+        }
+      })
+
+    this.pathParamService.onRequestIdParam
+      .subscribe(id => this.selectedId = id);
   }
 
   showInfoToast(title: string, message: string) {
@@ -38,59 +56,39 @@ export class ToDoListComponent implements OnInit {
   addItem(item: ToDoListItem) {
     this.toDoListDataService.addItem(item)
       .subscribe({
-        next: (v) => this.item = v,
         error: (e) => console.log(e),
-        complete: () => this.getItems(),
+        complete: () => this.items$ = this.getItems(),
       });
+    this.nextId++;
   }
 
   deleteItem(id: number) {
     this.toDoListDataService.deleteItem(id)
       .subscribe({
-        next: (v) => this.item = v,
         error: (e) => console.log(e),
-        complete: () => this.getItems(),
+        complete: () => this.items$= this.getItems(),
       });
-  }
-
-  editItem(item: ToDoListItem) {
-    this.editingItem = item;
-    this.editedItem = item;
   }
 
   updateItem(item: ToDoListItem) {
     this.toDoListDataService.updateItem(item)
       .subscribe({
-        next: (v) => this.item = v,
         error: (e) => console.log(e),
-        complete: () => this.getItems(),
+        complete: () => this.items$= this.getItems(),
       });
-    this.editingItem = undefined;
-    this.editedItem = undefined;
     this.showInfoToast('INFO', 'Task was updated');
   }
 
-  changeStatus(id: number) {
-    this.toDoListDataService.getItemById(id)
-      .subscribe({
-          next: (v) =>  {
-            v.status = v.status === Status.COMPLETED ? Status.IN_PROGRESS : Status.COMPLETED;
-            this.toDoListDataService.updateItem(v).subscribe(updated => this.item = updated);
-          },
-          error: (e) => console.log(e),
-          complete: () => this.getItems(),
-        },
-      );
+  getItems(): Observable<ToDoListItem[]> {
+    return this.toDoListDataService.getItems();
   }
 
-  getItems() {
-    this.toDoListDataService.getItems()
-      .subscribe(items => this.items = items);
+  setFilter(value: Status | null) {
+    this.selectedFilter = value;
   }
 
-  getLastId(): number {
-    const lastItem = this.items.find(item => item.id === Math.max(...this.items.map(it => it.id)))
-    return lastItem ? lastItem.id : 0;
+  getNextId(): number {
+    return this.nextId;
   }
 
 }

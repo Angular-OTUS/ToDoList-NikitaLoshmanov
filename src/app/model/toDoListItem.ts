@@ -1,15 +1,10 @@
 import {Status} from "./status";
 
 export class ToDoListItem {
-  id: number;
-  text: string;
-  description: string;
-  status: Status;
+  constructor(
+    public id: number,
+    public text: string,
+    public description: string,
+    public status: Status) {}
 
-  constructor(id: number, text: string, description: string, status: Status) {
-    this.id = id;
-    this.text = text;
-    this.description = description;
-    this.status = status;
-  }
 }

@@ -1,8 +1,8 @@
-import {FilterItemsPipe} from './filter-items.pipe';
+import {FilterByItemStatusPipe} from './filter-items.pipe';
 
 describe('FilterItemsPipe', () => {
   it('create an instance', () => {
-    const pipe = new FilterItemsPipe();
+    const pipe = new FilterByItemStatusPipe();
     expect(pipe).toBeTruthy();
   });
 });

@@ -1,0 +1,19 @@
+:host {
+  display: flex;
+  flex: 1;
+}
+
+.form-field {
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  border-radius: 5px;
+  left:0;
+  right:0;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+input {
+  max-width: 70%;
+}

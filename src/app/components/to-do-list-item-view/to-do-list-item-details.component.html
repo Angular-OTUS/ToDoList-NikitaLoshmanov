@@ -1,0 +1,16 @@
+<ng-container *ngIf="item$ | async as item">
+  <mat-card class="description">
+    <mat-card-header>
+      <div class="col align-self-center justify-content-center">
+        <p class="font-monospace fs-5 text-center">Description</p>
+      </div>
+      <div class="col-2">
+        <app-button [styles]="['button', 'button-close']"
+                    (click)="close()"
+                    [tooltipMessage]="'Close description'">Close</app-button>
+      </div>
+    </mat-card-header>
+
+    <mat-card-content>{{item.description}}</mat-card-content>
+  </mat-card>
+</ng-container>

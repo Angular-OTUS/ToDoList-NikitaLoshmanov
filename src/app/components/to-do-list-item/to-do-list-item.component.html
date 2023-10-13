@@ -1,15 +1,36 @@
 <ng-container *ngIf="item">
-  <mat-checkbox [(ngModel)]="checked"
-                (ngModelChange)="changeStatus()"
+  <div class="item row align-items-center" *ngIf="editingItem !== item"
+       (dblclick)="setEditingItem(item)"
+       [class.selected]="item.id === selectedId"
   >
-  </mat-checkbox>
-  <div class="item-text" [appTooltip]="'Click to see description'"
-       (click)="goToItemView(item)">
-    {{item.text}}
+
+    <div class="col-1">
+      <mat-checkbox [(ngModel)]="checked"
+                    (ngModelChange)="changeStatus()">
+      </mat-checkbox>
+    </div>
+
+    <div class="col h-100"
+         (click)="goToItemView(item)"
+         [appTooltip]="'Click to see description'">
+      {{item.text}}
+    </div>
+
+    <div class="col-2">
+      <app-button [styles]="['button', 'button-delete']"
+                  (click)="deleteItem(item.id)"
+                  [tooltipMessage]="'Delete task'"
+      >Delete</app-button>
+    </div>
+
   </div>
-  <app-button [styles]="['button', 'button-delete']"
-              (click)="deleteItem(item.id)"
-              [tooltipMessage]="'Delete task'"
-  >Delete</app-button>
+
+  <ng-container *ngIf="editingItem === item">
+    <app-to-do-list-item-edit [item]="item"
+                              (updateItemEvent)="updateItem($event)">
+    </app-to-do-list-item-edit>
+  </ng-container>
 
 </ng-container>
+
+

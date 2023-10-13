@@ -3,9 +3,9 @@ import {ToDoListItem} from "../../model/toDoListItem";
 import {Status} from "../../model/status";
 
 @Pipe({
-  name: 'filterItems',
+  name: 'filterByItemStatus',
 })
-export class FilterItemsPipe implements PipeTransform {
+export class FilterByItemStatusPipe implements PipeTransform {
 
   transform(items: ToDoListItem[] | null, filter: Status | null): ToDoListItem[] | null {
     if (items) {
