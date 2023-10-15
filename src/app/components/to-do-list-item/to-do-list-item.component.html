@@ -1,6 +1,15 @@
-<div class="item-text" [appTooltip]="'Click to see description'">{{item?.text}}</div>
-<app-button title="Delete"
-                      [styles]="['button', 'button-delete']"
-                      (click)="deleteItem(item?.id); showInfoToast('INFO', 'Task was deleted')"
-                      [tooltipMessage]="'Delete task'"
-></app-button>
+<ng-container *ngIf="item">
+  <mat-checkbox [(ngModel)]="checked"
+                (ngModelChange)="changeStatus()"
+  >
+  </mat-checkbox>
+  <div class="item-text" [appTooltip]="'Click to see description'"
+       (click)="selectItem(item)">
+    {{item.text}}
+  </div>
+  <app-button [styles]="['button', 'button-delete']"
+              (click)="deleteItem(item.id)"
+              [tooltipMessage]="'Delete task'"
+  >Delete</app-button>
+
+</ng-container>

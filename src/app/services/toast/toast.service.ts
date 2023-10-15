@@ -1,28 +1,27 @@
 import {Injectable} from '@angular/core';
 import {Toast} from "../../model/toast";
+import {Subject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ToastService {
-  private toasts: Toast[] = [];
+  private toastSubject = new Subject<Toast>();
+
   show(title: string, message: string, duration = 5000) {
-    const toast = new Toast(true);
-    toast.title = title;
-    toast.message = message
-    this.toasts.push(toast);
+    const toast = new Toast(title, message, true);
+    this.toastSubject.next(toast);
     setTimeout(() => {
-      this.remove(toast);
+      this.hide(toast);
     }, duration);
   }
 
-  remove(toast: Toast) {
+  hide(toast: Toast) {
     toast.visible = false;
-    this.toasts = this.toasts.filter(t => t !== toast);
   }
 
-  getToasts() {
-    return this.toasts;
+  getToast() {
+    return this.toastSubject.asObservable();
   }
 
 }

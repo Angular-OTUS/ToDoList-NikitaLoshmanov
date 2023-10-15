@@ -1,0 +1,15 @@
+<form class="form-field" #itemForm="ngForm">
+  <div class="form-group mb-3">
+    <label for="itemText">Add your new task</label>
+    <input class="input form-control" id="itemText" type="text" [(ngModel)]="itemText" name="itemText" required>
+  </div>
+  <div class="form-group mb-3">
+    <label for="itemDescription">Description</label>
+    <input class="input form-control" id="itemDescription" type="text" [(ngModel)]="itemDescription" name="itemDescription">
+  </div>
+  <app-button [styles]="['button', 'button-add']"
+              (click)="newItem(); itemForm.reset()"
+              [tooltipMessage]="'Add new task'"
+              [isDisabled]="itemForm.form.invalid">Add</app-button>
+</form>
+

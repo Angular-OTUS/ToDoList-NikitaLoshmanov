@@ -3,6 +3,8 @@ import {CommonModule} from '@angular/common';
 import {ButtonComponent} from "./components/button/button.component";
 import {CustomTooltipDirective} from './directive/custom-tooltip.directive';
 import {CustomTooltipComponent} from './components/tooltip/custom-tooltip.component';
+import {SpinnerComponent} from './components/spinner/spinner.component';
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 
 @NgModule({
@@ -10,15 +12,18 @@ import {CustomTooltipComponent} from './components/tooltip/custom-tooltip.compon
       ButtonComponent,
       CustomTooltipDirective,
       CustomTooltipComponent,
+      SpinnerComponent,
   ],
-  imports: [
-    CommonModule,
-  ],
+    imports: [
+        CommonModule,
+        MatProgressSpinnerModule,
+    ],
   exports: [
-      CommonModule,
-      ButtonComponent,
-      CustomTooltipComponent,
-      CustomTooltipDirective,
+    CommonModule,
+    ButtonComponent,
+    CustomTooltipComponent,
+    CustomTooltipDirective,
+    SpinnerComponent,
   ],
 })
 export class SharedModule { }

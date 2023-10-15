@@ -1,6 +1,7 @@
 <button [disabled]="isDisabled"
         type="{{type}}"
-        class="{{styles.join(' ')}}"
+        [ngClass]="styles"
         [class.button-disabled]="isDisabled"
-        [appTooltip]="tooltipMessage"
->{{title}}</button>
+        [appTooltip]="tooltipMessage">
+  <ng-content></ng-content>
+</button>

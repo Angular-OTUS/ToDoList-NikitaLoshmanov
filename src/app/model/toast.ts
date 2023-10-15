@@ -1,12 +1,11 @@
 export class Toast {
   public visible: boolean;
-  public title: string | undefined;
-  public message: string | undefined;
-  public position: string;
+  public title: string;
+  public message: string;
 
-  constructor(visible: boolean) {
+  constructor(title: string, message: string, visible: boolean) {
     this.visible = visible;
-    this.position = 'position-top-right';
+    this.title = title;
+    this.message = message;
   }
-
 }

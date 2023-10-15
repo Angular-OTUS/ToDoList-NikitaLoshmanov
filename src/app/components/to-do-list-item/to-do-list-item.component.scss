@@ -1,9 +1,16 @@
+:host {
+  display: flex;
+  align-items: center;
+}
+
 .item-text {
-  float: left;
-  display: block;
-  margin: 5px auto 5px auto;
-  max-width: 80%;
+  flex-grow: 1;
+  max-width: 60%;
+  margin: 0;
   white-space: pre-wrap;
   word-break: break-all;
 }
 
+mat-checkbox {
+  float: left;
+}
