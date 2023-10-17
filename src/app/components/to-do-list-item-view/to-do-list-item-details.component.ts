@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {ToDoListItem} from "../../model/toDoListItem";
+import {ToDoListItem} from "../../model/to-do-list-item";
 import {ToDoListDataService} from "../../services/toDoListData/to-do-list-data.service";
 import {Observable, switchMap, tap} from "rxjs";
 import {PathParamSharedService} from "../../services/shared/pathParam/path-param-shared.service";
@@ -35,6 +35,7 @@ export class ToDoListItemDetailsComponent implements OnInit{
     this.router.navigate(['..', {id: this.id}], {
       relativeTo: this.route,
     })
+    this.pathParamService.onRequestIdParam.emit(null);
   }
 
 }

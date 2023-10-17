@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {ToDoListItem} from "../../model/toDoListItem";
+import {ToDoListItem} from "../../model/to-do-list-item";
 import {ToastService} from "../../services/toast/toast.service";
 import {Status} from "../../model/status";
 import {Router} from "@angular/router";
@@ -13,7 +13,6 @@ export class ToDoListItemComponent implements OnInit {
   @Input() item!: ToDoListItem;
   @Input() selectedId: number | null = null;
   @Output() deleteItemEvent = new EventEmitter<number>();
-  @Output() changeStatusEvent = new EventEmitter<ToDoListItem>();
   @Output() updateItemEvent = new EventEmitter<ToDoListItem>();
 
   checked: boolean | undefined;
@@ -26,8 +25,10 @@ export class ToDoListItemComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.item) {
+      console.log("item in onInit: ", this.item)
       this.checked = this.item.status !== Status.IN_PROGRESS;
     }
+    console.log("onInit checked: ", this.checked)
   }
 
   goToItemView(item: ToDoListItem) {
@@ -53,11 +54,14 @@ export class ToDoListItemComponent implements OnInit {
   }
 
   changeStatus() {
-    if (this.item) {
-      this.checked = this.item.status !== Status.IN_PROGRESS;
-      this.item.status = this.item.status === Status.COMPLETED ? Status.IN_PROGRESS : Status.COMPLETED;
-      this.changeStatusEvent.emit(this.item);
+    if (this.checked) {
+      this.item.status = Status.COMPLETED;
+      this.checked = true;
+    } else {
+      this.item.status = Status.IN_PROGRESS;
+      this.checked = false;
     }
+    this.updateItemEvent.emit(this.item);
   }
 
 }

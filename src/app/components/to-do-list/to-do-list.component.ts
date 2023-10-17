@@ -1,10 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {ToDoListItem} from "../../model/toDoListItem";
+import {ToDoListItem} from "../../model/to-do-list-item";
 import {ToDoListDataService} from "../../services/toDoListData/to-do-list-data.service";
 import {ToastService} from "../../services/toast/toast.service";
 import {Status} from "../../model/status";
-import {Observable, tap} from "rxjs";
-import {ActivatedRoute} from "@angular/router";
+import {async, Observable} from "rxjs";
 import {PathParamSharedService} from "../../services/shared/pathParam/path-param-shared.service";
 
 @Component({
@@ -14,7 +13,7 @@ import {PathParamSharedService} from "../../services/shared/pathParam/path-param
 })
 export class ToDoListComponent implements OnInit {
   items$: Observable<ToDoListItem[]> | undefined;
-  nextId = 0;
+  nextId: number | undefined;
   isLoading = true;
   selectedFilter: Status | null = null;
   selectedId: number | null = null;
@@ -25,26 +24,12 @@ export class ToDoListComponent implements OnInit {
     private toDoListDataService: ToDoListDataService,
     private toastService: ToastService,
     private pathParamService: PathParamSharedService,
-    private route: ActivatedRoute,
-  ) {
-    this.route.params.pipe(tap(p => {
-      if (+p['id'] === this.selectedId) {
-        this.selectedId = null;
-      }
-    })).subscribe()
-  }
+  ) {}
 
   ngOnInit(): void {
     setTimeout(() => this.isLoading = false, 500)
     this.items$ = this.getItems();
-
-    this.items$.subscribe(items => {
-        const lastItem = items.find(item => item.id === Math.max(...items.map(item => item.id)));
-        if (lastItem) {
-          this.nextId = lastItem.id + 1;
-        }
-      })
-
+    this.nextId = this.toDoListDataService.getNextId();
     this.pathParamService.onRequestIdParam
       .subscribe(id => this.selectedId = id);
   }
@@ -57,9 +42,11 @@ export class ToDoListComponent implements OnInit {
     this.toDoListDataService.addItem(item)
       .subscribe({
         error: (e) => console.log(e),
-        complete: () => this.items$ = this.getItems(),
+        complete: () =>{
+          this.items$ = this.getItems();
+          this.nextId = this.toDoListDataService.getNextId();
+        },
       });
-    this.nextId++;
   }
 
   deleteItem(id: number) {
@@ -87,8 +74,10 @@ export class ToDoListComponent implements OnInit {
     this.selectedFilter = value;
   }
 
-  getNextId(): number {
+  getNextId(): number | undefined {
     return this.nextId;
   }
 
+  protected readonly async = async;
+  protected readonly length = length;
 }

@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
-import {ToDoListItem} from "../../model/toDoListItem";
+import {ToDoListItem} from "../../model/to-do-list-item";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {Observable, tap} from "rxjs";
 
 @Injectable({
   providedIn: 'root',
@@ -37,6 +37,19 @@ export class ToDoListDataService {
   updateItem(item: ToDoListItem): Observable<ToDoListItem> {
     const url = `${this.itemsUrl}/${item.id}`;
     return this.http.put<ToDoListItem>(url, item, this.httpOptions);
+  }
+
+  getNextId(): number {
+    let nextId = 0;
+    this.getItems()
+        .pipe(
+            tap(items => {
+              const lastItem = items.find(item => item.id === Math.max(...items.map(item => item.id)));
+              if (lastItem) {
+                nextId = lastItem.id + 1;
+              }
+            }))
+    return nextId;
   }
 
 }

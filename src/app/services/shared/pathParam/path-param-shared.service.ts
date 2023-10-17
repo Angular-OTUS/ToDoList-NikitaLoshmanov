@@ -4,5 +4,5 @@ import {EventEmitter, Injectable} from '@angular/core';
   providedIn: 'root',
 })
 export class PathParamSharedService {
-  onRequestIdParam = new EventEmitter<number>();
+  onRequestIdParam = new EventEmitter<number | null>();
 }
