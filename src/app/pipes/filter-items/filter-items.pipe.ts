@@ -1,21 +1,20 @@
 import {Pipe, PipeTransform} from '@angular/core';
-import {ToDoListItem} from "../../model/toDoListItem";
+import {ToDoListItem} from "../../model/to-do-list-item";
 import {Status} from "../../model/status";
 
 @Pipe({
-  name: 'filterItems',
+  name: 'filterByItemStatus',
 })
-export class FilterItemsPipe implements PipeTransform {
+export class FilterByItemStatusPipe implements PipeTransform {
 
-  transform(items: ToDoListItem[], filter: Status | null): ToDoListItem[] {
-    if (filter === null) {
-      return items;
-    } else if (filter === Status.COMPLETED) {
-      return items.filter(item => item.status === Status.COMPLETED);
-    } else if (filter === Status.IN_PROGRESS) {
-      return items.filter(item => item.status === Status.IN_PROGRESS);
+  transform(items: ToDoListItem[] | null, filter: Status | null): ToDoListItem[] | null {
+    if (items) {
+      if (filter === null) {
+        return items;
+      }
+      return items.filter(item => item.status === filter);
     }
-    return items;
+    return null;
   }
 
 }

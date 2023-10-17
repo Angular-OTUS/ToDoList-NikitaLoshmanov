@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {ToDoListItem} from "../../model/toDoListItem";
+import {ToDoListItem} from "../../model/to-do-list-item";
 import {ToastService} from "../../services/toast/toast.service";
 import {Status} from "../../model/status";
 
@@ -19,9 +19,11 @@ export class TodoCreateItemComponent {
   ) {}
 
   newItem() {
-    if (this.index) {
+    if (this.index !== undefined) {
       this.save.emit(new ToDoListItem(this.index, this.itemText, this.itemDescription, Status.IN_PROGRESS));
       this.showInfoToast('INFO', 'New task was added')
+    } else {
+      console.error('Next ID is undefined');
     }
   }
 

@@ -17,10 +17,13 @@ import {MatTooltipModule} from "@angular/material/tooltip";
 import {ToastComponent} from './components/toast/toast.component';
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatChipsModule} from "@angular/material/chips";
-import {FilterItemsPipe} from './pipes/filter-items/filter-items.pipe';
+import {FilterByItemStatusPipe} from './pipes/filter-items/filter-items.pipe';
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
 import {TodoCreateItemComponent} from './components/todo-create-item/todo-create-item.component';
 import {HttpClientModule} from "@angular/common/http";
+import {AppRoutingModule} from "./app-routing.module";
+import {ToDoListItemDetailsComponent} from './components/to-do-list-item-view/to-do-list-item-details.component';
+import {ToDoListItemEditComponent} from './components/to-to-list-item-edit/to-do-list-item-edit.component';
 
 @NgModule({
   declarations: [
@@ -28,8 +31,10 @@ import {HttpClientModule} from "@angular/common/http";
     ToDoListComponent,
     ToDoListItemComponent,
     ToastComponent,
-    FilterItemsPipe,
+    FilterByItemStatusPipe,
     TodoCreateItemComponent,
+    ToDoListItemDetailsComponent,
+    ToDoListItemEditComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,6 +53,7 @@ import {HttpClientModule} from "@angular/common/http";
     MatButtonToggleModule,
     FormsModule,
     HttpClientModule,
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

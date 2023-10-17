@@ -1,6 +1,26 @@
 :host {
   display: flex;
   align-items: center;
+  margin: 10px 0 10px 0;
+}
+
+.item {
+  flex: 1;
+  cursor: pointer;
+  background: #c9c4c4;
+  max-width: 90%;
+  min-height: 50px;
+  margin: auto auto 15px;
+  border-radius: 5px;
+  height: fit-content;
+}
+
+.selected {
+  background-color: #645c3c;
+}
+
+.item:hover {
+  background: #dcd7a9;
 }
 
 .item-text {
@@ -14,3 +34,4 @@
 mat-checkbox {
   float: left;
 }
+

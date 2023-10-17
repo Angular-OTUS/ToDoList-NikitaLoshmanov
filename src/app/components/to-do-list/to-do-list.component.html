@@ -1,55 +1,27 @@
-<app-spinner [isLoading]="isLoading"></app-spinner>
-<mat-card class="to-do-list-card" [class.hide]="isLoading">
-  <mat-card-title class="title">ToDo List</mat-card-title>
-  <ng-container *ngIf="items.length !== 0">
-    <mat-button-toggle-group name="taskFilter" aria-label="Task Filter" class="filter">
-      <mat-button-toggle value="All" (click)="selectedFilter = null">All</mat-button-toggle>
-      <mat-button-toggle value="Completed" (click)="selectedFilter = Status.COMPLETED">Completed</mat-button-toggle>
-      <mat-button-toggle value="Active" (click)="selectedFilter = Status.IN_PROGRESS">Active</mat-button-toggle>
-    </mat-button-toggle-group>
-  </ng-container>
+<app-toast></app-toast>
+<div class="wrap">
+  <app-spinner [isLoading]="isLoading"></app-spinner>
+  <mat-card class="to-do-list-card" [class.hide]="isLoading">
+    <mat-card-title class="title">ToDo List</mat-card-title>
+    <ng-container *ngIf="items$ | async as items">
+      <mat-button-toggle-group *ngIf="items.length > 0" name="taskFilter" aria-label="Task Filter" class="filter">
+        <mat-button-toggle value="All" (click)="setFilter(null)">All</mat-button-toggle>
+        <mat-button-toggle value="Completed" (click)="setFilter(Status.COMPLETED)">Completed</mat-button-toggle>
+        <mat-button-toggle value="Active" (click)="setFilter(Status.IN_PROGRESS)">Active</mat-button-toggle>
+      </mat-button-toggle-group>
+      <app-to-do-list-item *ngFor="let item of items | filterByItemStatus:selectedFilter"
+                           [item]="item"
+                           [selectedId]="selectedId"
+                           (deleteItemEvent)="deleteItem($event)"
+                           (updateItemEvent)="updateItem($event)"
+      >
+      </app-to-do-list-item>
+    </ng-container>
 
-  <mat-list>
-    <mat-list-item class="item"
-                   *ngFor="let item of items | filterItems:selectedFilter"
-                   (dblclick)="editItem(item)"
-                   [ngClass]="{ 'selected': item.id === selectedItem?.id}">
-      <ng-container *ngIf="!editingItem || editingItem !== item">
-        <app-to-do-list-item
-          [item]="item"
-          (deleteItemEvent)="deleteItem($event)"
-          (changeStatusEvent)="changeStatus($event)"
-          (selectItemEvent)="selectItem($event)"
-        ></app-to-do-list-item>
-      </ng-container>
-      <ng-container *ngIf="editingItem === item">
-        <mat-form-field class="form-field">
-          <input class="input" matInput type="text" [(ngModel)]="item.text">
-          <app-button [styles]="['button', 'button-update']"
-                      (click)="updateItem(item.id, item.text)"
-                      [tooltipMessage]="'Update task'"
-          >Save</app-button>
-        </mat-form-field>
-      </ng-container>
-    </mat-list-item>
-  </mat-list>
-
-  <app-todo-create-item [index]="getLastId() + 1"
-                        (save)="addItem($event)"
-  >
-  </app-todo-create-item>
-</mat-card>
-<ng-container *ngIf="selectedItem">
-  <mat-card class="description">
-    <mat-card-header>
-      <app-button [styles]="['button', 'button-close']"
-                  (click)="clearSelection()"
-                  [tooltipMessage]="'Close description'">Close</app-button>
-    </mat-card-header>
-
-    <mat-card-content>{{selectedItem.description}}</mat-card-content>
+    <app-todo-create-item [index]="getNextId()"
+                          (save)="addItem($event)"
+    >
+    </app-todo-create-item>
   </mat-card>
-</ng-container>
-
-
-
+  <router-outlet></router-outlet>
+</div>

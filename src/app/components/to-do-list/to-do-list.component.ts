@@ -1,8 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {ToDoListItem} from "../../model/toDoListItem";
+import {ToDoListItem} from "../../model/to-do-list-item";
 import {ToDoListDataService} from "../../services/toDoListData/to-do-list-data.service";
 import {ToastService} from "../../services/toast/toast.service";
 import {Status} from "../../model/status";
+import {async, Observable} from "rxjs";
+import {PathParamSharedService} from "../../services/shared/pathParam/path-param-shared.service";
 
 @Component({
   selector: 'app-to-do-list',
@@ -10,106 +12,72 @@ import {Status} from "../../model/status";
   styleUrls: ['./to-do-list.component.scss'],
 })
 export class ToDoListComponent implements OnInit {
-  items: ToDoListItem[] = [];
-  item!: ToDoListItem;
+  items$: Observable<ToDoListItem[]> | undefined;
+  nextId: number | undefined;
   isLoading = true;
-  selectedItem: ToDoListItem | null = null;
-  editingItem: ToDoListItem | undefined;
-  editedItem: ToDoListItem | undefined
   selectedFilter: Status | null = null;
+  selectedId: number | null = null;
 
   protected readonly Status = Status;
 
   constructor(
     private toDoListDataService: ToDoListDataService,
     private toastService: ToastService,
+    private pathParamService: PathParamSharedService,
   ) {}
 
   ngOnInit(): void {
     setTimeout(() => this.isLoading = false, 500)
-    this.getItems();
+    this.items$ = this.getItems();
+    this.nextId = this.toDoListDataService.getNextId();
+    this.pathParamService.onRequestIdParam
+      .subscribe(id => this.selectedId = id);
   }
 
   showInfoToast(title: string, message: string) {
     this.toastService.show(title, message);
   }
 
-  clearSelection() {
-    this.selectedItem = null;
-  }
-
   addItem(item: ToDoListItem) {
     this.toDoListDataService.addItem(item)
       .subscribe({
-        next: (v) => this.item = v,
         error: (e) => console.log(e),
-        complete: () => this.items.push(this.item),
+        complete: () =>{
+          this.items$ = this.getItems();
+          this.nextId = this.toDoListDataService.getNextId();
+        },
       });
   }
 
   deleteItem(id: number) {
     this.toDoListDataService.deleteItem(id)
       .subscribe({
-        next: (v) => this.item = v,
         error: (e) => console.log(e),
-        complete: () => this.getItems(),
+        complete: () => this.items$= this.getItems(),
       });
   }
 
-  getItemById(id: number) {
-    this.toDoListDataService.getItemById(id)
-      .subscribe(item => this.item = item);
-  }
-
-  selectItem(item: ToDoListItem) {
-    this.selectedItem = item;
-  }
-
-  editItem(item: ToDoListItem) {
-    this.editingItem = item;
-    this.editedItem = item;
-  }
-
-  updateItem(id: number, inputText: string) {
-    const foundItem = this.items.find(item => item.id === id);
-    if (foundItem) {
-      foundItem.text = inputText;
-      this.toDoListDataService.updateItem(foundItem)
-        .subscribe({
-          next: (v) => this.item = v,
-          error: (e) => console.log(e),
-          complete: () => this.getItems(),
-        });
-    }
-    this.editingItem = undefined;
-    this.editedItem = undefined;
+  updateItem(item: ToDoListItem) {
+    this.toDoListDataService.updateItem(item)
+      .subscribe({
+        error: (e) => console.log(e),
+        complete: () => this.items$= this.getItems(),
+      });
     this.showInfoToast('INFO', 'Task was updated');
   }
 
-  changeStatus(id: number) {
-    this.toDoListDataService.getItemById(id)
-      .subscribe({
-          next: (v) =>  {
-            v.status = v.status === Status.COMPLETED ? Status.IN_PROGRESS : Status.COMPLETED;
-            this.toDoListDataService.updateItem(v).subscribe(updated => this.item = updated);
-          },
-          error: (e) => console.log(e),
-          complete: () => this.getItems(),
-        },
-      );
+  getItems(): Observable<ToDoListItem[]> {
+    return this.toDoListDataService.getItems();
   }
 
-  getItems() {
-    this.toDoListDataService.getItems().subscribe(items => this.items = items);
+  setFilter(value: Status | null) {
+    this.selectedFilter = value;
   }
 
-  getLastId(): number {
-    const lastItem = this.items.find(item => item.id === Math.max(...this.items.map(it => it.id)));
-    if (lastItem) {
-      return lastItem.id
-    } else {
-      return 0;
-    }
+  getNextId(): number | undefined {
+    return this.nextId;
   }
 
+  protected readonly async = async;
+  protected readonly length = length;
 }

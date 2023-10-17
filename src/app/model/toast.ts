@@ -1,11 +1,7 @@
 export class Toast {
-  public visible: boolean;
-  public title: string;
-  public message: string;
+  constructor(
+    public title: string,
+    public message: string,
+    public visible: boolean) {}
 
-  constructor(title: string, message: string, visible: boolean) {
-    this.visible = visible;
-    this.title = title;
-    this.message = message;
-  }
 }
