@@ -1,0 +1,7 @@
+<ng-container *ngIf="item$ | async as item">
+  <div class="description vstack gap-3 fs-4">
+    <div class="p-2">Task: {{item.text}}</div>
+    <div class="p-2">Status: {{item.status}}</div>
+    <div class="p-2">Description: {{item.description}}</div>
+  </div>
+</ng-container>

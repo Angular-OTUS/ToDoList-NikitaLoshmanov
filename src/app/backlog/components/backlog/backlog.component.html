@@ -1,0 +1,24 @@
+<app-header [header]="headerText"></app-header>
+<div class="wrap">
+  <div class="col-3">
+    <button type="button"
+            class="btn btn-outline-secondary d-block m-auto"
+            [appTooltip]="'Click to start adding your new task'"
+            (click)="openDialog()"
+    >
+      Add task
+    </button>
+    <ng-container *ngIf="items$ | async as items">
+      <app-task *ngFor="let item of items"
+                           [task]="item"
+                           [selectedId]="selectedId"
+                           (deleteItemEvent)="deleteTask($event)"
+                           (updateItemEvent)="updateTask($event)"
+      >
+      </app-task>
+    </ng-container>
+  </div>
+  <div class="col">
+    <router-outlet></router-outlet>
+  </div>
+</div>

@@ -1,13 +1,13 @@
 import {Pipe, PipeTransform} from '@angular/core';
-import {ToDoListItem} from "../../model/to-do-list-item";
-import {Status} from "../../model/status";
+import {Task} from "../../shared/model/task";
+import {Status} from "../../shared/model/status";
 
 @Pipe({
   name: 'filterByItemStatus',
 })
 export class FilterByItemStatusPipe implements PipeTransform {
 
-  transform(items: ToDoListItem[] | null, filter: Status | null): ToDoListItem[] | null {
+  transform(items: Task[] | null, filter: Status | null): Task[] | null {
     if (items) {
       if (filter === null) {
         return items;
