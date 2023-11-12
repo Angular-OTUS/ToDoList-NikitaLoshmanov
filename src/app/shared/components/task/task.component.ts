@@ -19,7 +19,6 @@ export class TaskComponent implements OnInit {
   @Output() updateItemEvent = new EventEmitter<Task>();
 
   checked: boolean | undefined;
-  editingItem: Task | undefined;
 
   constructor(
     private toastService: ToastService,

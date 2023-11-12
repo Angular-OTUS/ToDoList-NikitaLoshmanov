@@ -36,7 +36,7 @@ export class AddEditDialogController {
   onSaveClick(): any {
     const {value} = this.form;
     if (this.data.editMode === EditMode.UPDATE) {
-      this.tasksBoardDataService.getItemById(this.data.id).pipe(
+      this.tasksBoardDataService.getTaskById(this.data.id).pipe(
         tap(task => {
           task.text = value.text;
           task.description = value.description;

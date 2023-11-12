@@ -14,7 +14,10 @@
 
 .sidenav {
   flex: 0 0 10%;
-  background-color: whitesmoke;
+}
+
+.active {
+  background-color: darkgrey;
 }
 
 .content {

@@ -1,11 +1,15 @@
 <app-spinner [isLoading]="isLoading"></app-spinner>
 <div class="container h-100" [class.hide]="isLoading">
   <app-toast></app-toast>
-  <div class="sidenav border">
+  <div class="sidenav border bg-dark">
     <app-header [header]="title"></app-header>
-    <mat-nav-list>
-      <a mat-list-item routerLink="/tasks/backlog" routerLinkActive="active">Backlog</a>
-      <a mat-list-item routerLink="/tasks/board">Board</a>
+    <mat-nav-list class="py-0">
+      <a mat-list-item routerLink="/tasks/backlog" routerLinkActive="active">
+        <p class="text-light m-auto fs-5">Backlog</p>
+      </a>
+      <a mat-list-item routerLink="/tasks/board" routerLinkActive="active">
+        <p class="text-light m-auto fs-5">Board</p>
+      </a>
     </mat-nav-list>
   </div>
 

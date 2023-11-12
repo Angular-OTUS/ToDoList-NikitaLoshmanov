@@ -1,7 +1,9 @@
-<ng-container *ngIf="item$ | async as item">
-  <div class="description vstack gap-3 fs-4">
-    <div class="p-2">Task: {{item.text}}</div>
-    <div class="p-2">Status: {{item.status}}</div>
-    <div class="p-2">Description: {{item.description}}</div>
-  </div>
-</ng-container>
+<mat-card *ngIf="task$ | async as task" class="example-card">
+  <mat-card-header>
+    <mat-card-title>{{task.text}}</mat-card-title>
+    <mat-card-subtitle>{{task.status}}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <p>{{task.description}}</p>
+  </mat-card-content>
+</mat-card>

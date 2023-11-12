@@ -8,6 +8,7 @@ import {AddEditDialogComponent} from "../../../shared/components/dialog/add-edit
 import {MatDialog} from "@angular/material/dialog";
 import {Status} from "../../../shared/model/status";
 import {EditMode} from "../../../shared/model/editMode";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-backlog',
@@ -25,6 +26,8 @@ export class BacklogComponent implements OnInit{
     private toastService: ToastService,
     private pathParamService: PathParamSharedService,
     private dialog: MatDialog,
+    private router: Router,
+    private route: ActivatedRoute,
   ) {}
 
   ngOnInit(): void {
@@ -65,6 +68,11 @@ export class BacklogComponent implements OnInit{
         complete: () => {
           this.items$ = this.getTasks()
           this.showInfoToast('INFO', 'Task was updated');
+          this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+            this.router.navigate(['tasks', 'backlog', task.id]);
+          });
+
+          // this.router.navigate(['tasks', 'backlog', task.id], {onSameUrlNavigation: 'reload'})
         },
       });
   }
@@ -88,7 +96,6 @@ export class BacklogComponent implements OnInit{
 
     dialogRef.afterClosed().subscribe(data => {
       if (data) {
-        console.log(data)
         this.addTask(data.task);
       }
     })

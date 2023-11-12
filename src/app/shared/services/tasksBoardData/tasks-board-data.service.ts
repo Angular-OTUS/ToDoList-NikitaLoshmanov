@@ -29,7 +29,7 @@ export class TasksBoardDataService {
     return this.http.delete<Task>(url, this.httpOptions);
   }
 
-  getItemById(id: number): Observable<Task> {
+  getTaskById(id: number): Observable<Task> {
     const url = `${this.itemsUrl}/${id}`;
     return this.http.get<Task>(url, this.httpOptions);
   }
