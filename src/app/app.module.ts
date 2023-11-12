@@ -14,7 +14,6 @@ import {SharedModule} from "./shared/shared.module";
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatChipsModule} from "@angular/material/chips";
-import {FilterByItemStatusPipe} from './pipes/filter-items/filter-items.pipe';
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
 import {HttpClientModule} from "@angular/common/http";
 import {AppRoutingModule} from "./app-routing.module";
@@ -25,36 +24,35 @@ import {MatSidenavModule} from "@angular/material/sidenav";
 import {MatDialogModule} from "@angular/material/dialog";
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        FilterByItemStatusPipe,
-        TaskBoardComponent,
-    ],
-    imports: [
-        BrowserModule,
-        BrowserAnimationsModule,
-        MatCardModule,
-        MatListModule,
-        MatButtonModule,
-        MatInputModule,
-        MatIconModule,
-        FormsModule,
-        MatProgressSpinnerModule,
-        SharedModule,
-        MatTooltipModule,
-        MatCheckboxModule,
-        MatChipsModule,
-        MatButtonToggleModule,
-        FormsModule,
-        HttpClientModule,
-        AppRoutingModule,
-        BoardModule,
-        BacklogModule,
-        SharedModule,
-        MatSidenavModule,
-        MatDialogModule,
-    ],
-    providers: [],
-    bootstrap: [AppComponent],
+  declarations: [
+    AppComponent,
+    TaskBoardComponent,
+  ],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    MatCardModule,
+    MatListModule,
+    MatButtonModule,
+    MatInputModule,
+    MatIconModule,
+    FormsModule,
+    MatProgressSpinnerModule,
+    SharedModule,
+    MatTooltipModule,
+    MatCheckboxModule,
+    MatChipsModule,
+    MatButtonToggleModule,
+    FormsModule,
+    HttpClientModule,
+    AppRoutingModule,
+    BoardModule,
+    BacklogModule,
+    SharedModule,
+    MatSidenavModule,
+    MatDialogModule,
+  ],
+  providers: [],
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

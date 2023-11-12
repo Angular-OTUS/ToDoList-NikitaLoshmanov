@@ -1,9 +1,9 @@
-<ng-container *ngIf="task">
+<ng-container *ngIf="task && !readonly">
   <div class="item row align-items-center"
        [class.selected]="task.id === selectedId"
   >
 
-    <div class="col h-100"
+    <div class="col h-100 fs-5"
          (click)="goToTaskDetails(task)"
          [appTooltip]="'Click to see description'">
       {{task.text}}
@@ -22,6 +22,19 @@
           <mat-icon>delete</mat-icon>
         </button>
       </div>
+    </div>
+
+  </div>
+
+</ng-container>
+
+<ng-container *ngIf="task && readonly">
+  <div class="item row align-items-center"
+       [class.selected]="task.id === selectedId"
+  >
+
+    <div class="col h-100">
+      <p class="float-start m-0 fs-5">{{task.text}}</p>
     </div>
 
   </div>

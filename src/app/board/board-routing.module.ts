@@ -6,12 +6,6 @@ const boardRoutes: Routes = [
   {
     path: '',
     component: BoardComponent,
-    // children: [
-    //   {
-    //     path: ':id',
-    //     component: ToDoListItemDetailsComponent,
-    //   },
-    // ],
   },
   {path: '**', redirectTo: '', pathMatch: 'full'},
 ]

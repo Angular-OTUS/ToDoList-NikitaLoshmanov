@@ -17,7 +17,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 })
 export class BacklogComponent implements OnInit{
   headerText = 'Backlog'
-  items$: Observable<Task[]> | undefined;
+  tasks$: Observable<Task[]> | undefined;
   nextId: number | undefined;
   selectedId: number | null = null;
 
@@ -31,18 +31,18 @@ export class BacklogComponent implements OnInit{
   ) {}
 
   ngOnInit(): void {
-    this.items$ = this.getTasks();
+    this.tasks$ = this.getTasks();
     this.nextId = this.tasksBoardDataService.getNextId();
     this.pathParamService.onRequestIdParam
       .subscribe(id => this.selectedId = id);
   }
 
-  addTask(item: Task) {
-    this.tasksBoardDataService.addTask(item)
+  addTask(task: Task) {
+    this.tasksBoardDataService.addTask(task)
       .subscribe({
         error: (e) => console.log(e),
         complete: () => {
-          this.items$ = this.getTasks();
+          this.tasks$ = this.getTasks();
           this.nextId = this.tasksBoardDataService.getNextId();
         },
       });
@@ -57,7 +57,7 @@ export class BacklogComponent implements OnInit{
     this.tasksBoardDataService.deleteTask(id)
       .subscribe({
         error: (e) => console.log(e),
-        complete: () => this.items$ = this.getTasks(),
+        complete: () => this.tasks$ = this.getTasks(),
       });
   }
 
@@ -66,13 +66,11 @@ export class BacklogComponent implements OnInit{
       .subscribe({
         error: (e) => console.log(e),
         complete: () => {
-          this.items$ = this.getTasks()
+          this.tasks$ = this.getTasks()
           this.showInfoToast('INFO', 'Task was updated');
           this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
             this.router.navigate(['tasks', 'backlog', task.id]);
           });
-
-          // this.router.navigate(['tasks', 'backlog', task.id], {onSameUrlNavigation: 'reload'})
         },
       });
   }

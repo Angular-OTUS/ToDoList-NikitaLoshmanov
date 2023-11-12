@@ -9,10 +9,10 @@ import {SharedModule} from "../shared/shared.module";
   declarations: [
     BoardComponent,
   ],
-  imports: [
-    CommonModule,
-    BoardRoutingModule,
-    SharedModule,
-  ],
+    imports: [
+        CommonModule,
+        BoardRoutingModule,
+        SharedModule,
+    ],
 })
 export class BoardModule { }

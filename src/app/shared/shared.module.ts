@@ -18,6 +18,7 @@ import {MatIconModule} from "@angular/material/icon";
 import {AddEditDialogComponent} from "./components/dialog/add-edit-dialog/add-edit-dialog.component";
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatSelectModule} from "@angular/material/select";
+import {FilterByTaskStatusPipe} from "./pipes/filter-tasks/filter-tasks.pipe";
 
 
 @NgModule({
@@ -31,6 +32,7 @@ import {MatSelectModule} from "@angular/material/select";
       TaskDetailsComponent,
       ToastComponent,
       AddEditDialogComponent,
+      FilterByTaskStatusPipe,
   ],
   imports: [
     CommonModule,
@@ -56,6 +58,7 @@ import {MatSelectModule} from "@angular/material/select";
     TaskDetailsComponent,
     ToastComponent,
     AddEditDialogComponent,
+    FilterByTaskStatusPipe,
   ],
 })
 export class SharedModule { }

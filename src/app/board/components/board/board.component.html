@@ -1,2 +1,36 @@
 <app-header [header]="headerText"></app-header>
-<p>board works!</p>
+<div class="container text-center m-0 mw-100 h-100 p-0">
+  <div class="row align-items-start m-0 h-100">
+    <div class="col h-100">
+      <h1>TODO</h1>
+      <ng-container *ngIf="tasks$ | async as tasks">
+        <app-task *ngFor="let task of tasks | filterByTaskStatus:Status.TODO"
+                  [task]="task"
+                  [readonly]="true"
+        >
+        </app-task>
+      </ng-container>
+
+    </div>
+    <div class="col border-start border-end h-100">
+      <h1>IN PROGRESS</h1>
+      <ng-container *ngIf="tasks$ | async as tasks">
+        <app-task *ngFor="let task of tasks | filterByTaskStatus:Status.IN_PROGRESS"
+                  [task]="task"
+                  [readonly]="true"
+        >
+        </app-task>
+      </ng-container>
+    </div>
+    <div class="col h-100">
+      <h1>DONE</h1>
+      <ng-container *ngIf="tasks$ | async as tasks">
+        <app-task *ngFor="let task of tasks | filterByTaskStatus:Status.DONE"
+                  [task]="task"
+                  [readonly]="true"
+        >
+        </app-task>
+      </ng-container>
+    </div>
+  </div>
+</div>

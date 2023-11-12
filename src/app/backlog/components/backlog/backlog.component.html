@@ -8,9 +8,9 @@
     >
       Add task
     </button>
-    <ng-container *ngIf="items$ | async as items">
-      <app-task *ngFor="let item of items"
-                           [task]="item"
+    <ng-container *ngIf="tasks$ | async as tasks">
+      <app-task *ngFor="let task of tasks"
+                           [task]="task"
                            [selectedId]="selectedId"
                            (deleteItemEvent)="deleteTask($event)"
                            (updateItemEvent)="updateTask($event)"
