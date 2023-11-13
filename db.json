@@ -17,6 +17,18 @@
       "text": "Курсы",
       "description": "Закончить курс по Ангуляр",
       "status": "IN PROGRESS"
+    },
+    {
+      "id": 4,
+      "text": "Билеты на футбол",
+      "description": "Купить билеты",
+      "status": "TODO"
+    },
+    {
+      "id": 5,
+      "text": "Очередная заметка",
+      "description": "bla bla",
+      "status": "IN PROGRESS"
     }
   ]
 }

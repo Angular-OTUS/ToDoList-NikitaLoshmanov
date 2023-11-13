@@ -29,16 +29,9 @@
 </ng-container>
 
 <ng-container *ngIf="task && readonly">
-  <div class="item row align-items-center"
-       [class.selected]="task.id === selectedId"
-  >
-
-    <div class="col h-100">
+    <div cdkDragHandle class="col h-100">
       <p class="float-start m-0 fs-5">{{task.text}}</p>
     </div>
-
-  </div>
-
 </ng-container>
 
 

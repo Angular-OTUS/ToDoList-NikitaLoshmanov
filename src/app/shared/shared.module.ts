@@ -19,6 +19,7 @@ import {AddEditDialogComponent} from "./components/dialog/add-edit-dialog/add-ed
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatSelectModule} from "@angular/material/select";
 import {FilterByTaskStatusPipe} from "./pipes/filter-tasks/filter-tasks.pipe";
+import {CdkDragHandle} from "@angular/cdk/drag-drop";
 
 
 @NgModule({
@@ -46,6 +47,7 @@ import {FilterByTaskStatusPipe} from "./pipes/filter-tasks/filter-tasks.pipe";
     MatIconModule,
     MatDialogModule,
     MatSelectModule,
+    CdkDragHandle,
   ],
   exports: [
     CommonModule,

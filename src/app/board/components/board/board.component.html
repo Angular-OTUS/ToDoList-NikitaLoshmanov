@@ -1,36 +1,53 @@
 <app-header [header]="headerText"></app-header>
-<div class="container text-center m-0 mw-100 h-100 p-0">
-  <div class="row align-items-start m-0 h-100">
-    <div class="col h-100">
-      <h1>TODO</h1>
-      <ng-container *ngIf="tasks$ | async as tasks">
-        <app-task *ngFor="let task of tasks | filterByTaskStatus:Status.TODO"
-                  [task]="task"
-                  [readonly]="true"
-        >
-        </app-task>
-      </ng-container>
 
+<div class="container text-center m-0 mw-100 h-100 p-0">
+  <div class="task-container">
+    <h1>TO DO</h1>
+
+
+    <div
+        cdkDropList
+        #todoList="cdkDropList"
+        [cdkDropListData]="todoTasks"
+        [cdkDropListConnectedTo]="[inProgressList, doneList]"
+        class="task-list"
+        (cdkDropListDropped)="drop($event)">
+        <div class="task-box" cdkDrag
+             *ngFor="let task of todoTasks">
+            <p class="float-start m-0 fs-5">{{task.text}}</p>
+        </div>
     </div>
-    <div class="col border-start border-end h-100">
-      <h1>IN PROGRESS</h1>
-      <ng-container *ngIf="tasks$ | async as tasks">
-        <app-task *ngFor="let task of tasks | filterByTaskStatus:Status.IN_PROGRESS"
-                  [task]="task"
-                  [readonly]="true"
-        >
-        </app-task>
-      </ng-container>
+  </div>
+
+  <div class="task-container">
+    <h1>IN PROGRESS</h1>
+
+    <div
+        cdkDropList
+        #inProgressList="cdkDropList"
+        [cdkDropListData]="inProgressTasks"
+        [cdkDropListConnectedTo]="[todoList, doneList]"
+        class="task-list"
+        (cdkDropListDropped)="drop($event)">
+        <div class="task-box" cdkDrag *ngFor="let task of inProgressTasks">
+          <p class="float-start m-0 fs-5">{{task.text}}</p>
+        </div>
     </div>
-    <div class="col h-100">
-      <h1>DONE</h1>
-      <ng-container *ngIf="tasks$ | async as tasks">
-        <app-task *ngFor="let task of tasks | filterByTaskStatus:Status.DONE"
-                  [task]="task"
-                  [readonly]="true"
-        >
-        </app-task>
-      </ng-container>
+  </div>
+
+  <div class="task-container">
+    <h1>DONE</h1>
+
+    <div
+      cdkDropList
+      #doneList="cdkDropList"
+      [cdkDropListData]="doneTasks"
+      [cdkDropListConnectedTo]="[todoList, inProgressList]"
+      class="task-list"
+      (cdkDropListDropped)="drop($event)">
+      <div class="task-box" cdkDrag *ngFor="let task of doneTasks">
+        <p class="float-start m-0 fs-5">{{task.text}}</p>
+      </div>
     </div>
   </div>
 </div>
