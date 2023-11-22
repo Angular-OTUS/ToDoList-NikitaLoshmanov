@@ -1,12 +1,12 @@
 import {Injectable} from '@angular/core';
 import {Task} from "../../model/task";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {Observable, tap} from "rxjs";
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root',
 })
-export class TasksBoardDataService {
+export class TasksApiService {
   private itemsUrl = 'http://localhost:3000/tasks';
 
   httpOptions = {
@@ -37,19 +37,6 @@ export class TasksBoardDataService {
   updateTask(item: Task): Observable<Task> {
     const url = `${this.itemsUrl}/${item.id}`;
     return this.http.put<Task>(url, item, this.httpOptions);
-  }
-
-  getNextId(): number {
-    let nextId = 0;
-    this.getTasks()
-        .pipe(
-            tap(items => {
-              const lastItem = items.find(item => item.id === Math.max(...items.map(item => item.id)));
-              if (lastItem) {
-                nextId = lastItem.id + 1;
-              }
-            }))
-    return nextId;
   }
 
 }

@@ -1,16 +1,16 @@
 import {Injectable} from '@angular/core';
 import {Toast} from "../../model/toast";
-import {Subject} from 'rxjs';
+import {BehaviorSubject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ToastService {
-  private toastSubject = new Subject<Toast>();
+  private toastSubject$ = new BehaviorSubject<Toast | undefined>(undefined);
 
   show(title: string, message: string, duration = 5000) {
     const toast = new Toast(title, message, true);
-    this.toastSubject.next(toast);
+    this.toastSubject$.next(toast);
     setTimeout(() => {
       this.hide(toast);
     }, duration);
@@ -21,7 +21,7 @@ export class ToastService {
   }
 
   getToast() {
-    return this.toastSubject.asObservable();
+    return this.toastSubject$.asObservable();
   }
 
 }

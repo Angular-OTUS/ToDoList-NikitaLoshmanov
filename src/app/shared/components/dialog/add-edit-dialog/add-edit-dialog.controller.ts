@@ -1,6 +1,6 @@
 import {Inject, Injectable} from "@angular/core";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {TasksBoardDataService} from "../../../services/tasksBoardData/tasks-board-data.service";
+import {TasksApiService} from "../../../services/api/tasks-api.service";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {AddEditDialogComponent} from "./add-edit-dialog.component";
 import {tap} from "rxjs";
@@ -21,7 +21,7 @@ export class AddEditDialogController {
   dialogTask!: Task;
 
   constructor(
-    private tasksBoardDataService: TasksBoardDataService,
+    private tasksBoardDataService: TasksApiService,
     public dialogRef: MatDialogRef<AddEditDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: TaskFormData,
     private fb: FormBuilder,
