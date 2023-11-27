@@ -1,0 +1,37 @@
+<ng-container *ngIf="task && !readonly">
+  <div class="item row align-items-center"
+       [class.selected]="task.id === selectedId"
+  >
+
+    <div class="col h-100 fs-5"
+         (click)="goToTaskDetails(task)"
+         [appTooltip]="'Click to see description'">
+      {{task.text}}
+    </div>
+
+    <div class="col-3">
+      <div class="float-end d-flex">
+        <button mat-icon-button class="p-0"
+                [appTooltip]="'Edit task'"
+                (click)="openDialog(task)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button class="p-0"
+                [appTooltip]="'Delete task'"
+                (click)="deleteItem(task.id)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+</ng-container>
+
+<ng-container *ngIf="task && readonly">
+    <div cdkDragHandle class="col h-100">
+      <p class="float-start m-0 fs-5">{{task.text}}</p>
+    </div>
+</ng-container>
+
+

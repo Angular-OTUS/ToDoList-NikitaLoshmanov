@@ -1,0 +1,21 @@
+<h2 mat-dialog-title>Task Details</h2>
+<div mat-dialog-content [formGroup]="view.form">
+  <mat-form-field class="d-block">
+    <input matInput placeholder="Short task" formControlName="text">
+    <mat-error *ngIf="view.form.get('text')?.hasError('required')">Task is required</mat-error>
+  </mat-form-field>
+  <mat-form-field class="d-block">
+    <input matInput placeholder="Task details" formControlName="description">
+  </mat-form-field>
+  <mat-form-field class="d-block">
+    <mat-label>Status</mat-label>
+    <mat-select id="status" formControlName="status">
+      <mat-option *ngFor="let value of statusValues" [value]="value">{{ value }}</mat-option>
+    </mat-select>
+    <mat-error *ngIf="view.form.get('status')?.hasError('required')">Status is required</mat-error>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="view.onSaveClick()" [disabled]="view.form.invalid">Save</button>
+  <button mat-button (click)="view.onCancelClick()">Cancel</button>
+</div>
