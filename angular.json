@@ -13,10 +13,19 @@
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
+      "i18n": {
+        "sourceLocale": "en-US",
+        "locales": {
+          "ru": {
+            "translation": "src/locale/messages.ru.xlf"
+          }
+        }
+      },
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "localize": true,
             "outputPath": "dist/todo-list",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -45,7 +54,7 @@
                 {
                   "type": "initial",
                   "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumError": "5mb"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -56,12 +65,16 @@
               "outputHashing": "all"
             },
             "development": {
+              "localize": false,
               "buildOptimizer": false,
               "optimization": false,
               "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true
+            },
+            "ru": {
+              "localize": ["ru"]
             }
           },
           "defaultConfiguration": "production"
@@ -74,6 +87,9 @@
             },
             "development": {
               "browserTarget": "todo-list:build:development"
+            },
+            "development-ru": {
+              "browserTarget": "todo-list:build:development,ru"
             }
           },
           "defaultConfiguration": "development"

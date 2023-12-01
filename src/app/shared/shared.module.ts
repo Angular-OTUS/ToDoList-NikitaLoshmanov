@@ -19,6 +19,7 @@ import {AddEditDialogComponent} from "./components/dialog/add-edit-dialog/add-ed
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatSelectModule} from "@angular/material/select";
 import {CdkDragHandle} from "@angular/cdk/drag-drop";
+import {MatTooltipModule} from "@angular/material/tooltip";
 
 
 @NgModule({
@@ -33,20 +34,21 @@ import {CdkDragHandle} from "@angular/cdk/drag-drop";
       ToastComponent,
       AddEditDialogComponent,
   ],
-  imports: [
-    CommonModule,
-    MatProgressSpinnerModule,
-    MatCheckboxModule,
-    FormsModule,
-    MatInputModule,
-    MatCardModule,
-    ReactiveFormsModule,
-    MatButtonModule,
-    MatIconModule,
-    MatDialogModule,
-    MatSelectModule,
-    CdkDragHandle,
-  ],
+    imports: [
+        CommonModule,
+        MatProgressSpinnerModule,
+        MatCheckboxModule,
+        FormsModule,
+        MatInputModule,
+        MatCardModule,
+        ReactiveFormsModule,
+        MatButtonModule,
+        MatIconModule,
+        MatDialogModule,
+        MatSelectModule,
+        CdkDragHandle,
+        MatTooltipModule,
+    ],
   exports: [
     CommonModule,
     ButtonComponent,
