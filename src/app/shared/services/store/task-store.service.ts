@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, shareReplay, switchMap, tap} from "rxjs";
-import {TasksBoardDataService} from "../tasksBoardData/tasks-board-data.service";
+import {TasksApiService} from "../api/tasks-api.service";
 import {Task} from "../../model/task";
 
 @Injectable({
@@ -15,7 +15,7 @@ export class TaskStoreService {
   )
 
   constructor(
-    private tasksBoardDataService: TasksBoardDataService,
+    private tasksBoardDataService: TasksApiService,
   ) { }
 
   addTask(task: Task) {

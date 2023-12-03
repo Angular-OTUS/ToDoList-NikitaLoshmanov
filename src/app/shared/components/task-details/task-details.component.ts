@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {Task} from "../../model/task";
-import {TasksBoardDataService} from "../../services/tasksBoardData/tasks-board-data.service";
+import {TasksApiService} from "../../services/api/tasks-api.service";
 import {Observable, switchMap} from "rxjs";
 import {PathParamSharedService} from "../../services/pathParam/path-param-shared.service";
 
@@ -14,7 +14,7 @@ export class TaskDetailsComponent implements OnInit{
   task$: Observable<Task> | null = null;
   constructor(
     private route: ActivatedRoute,
-    private service: TasksBoardDataService,
+    private service: TasksApiService,
     private pathParamService: PathParamSharedService,
   ) {}
 

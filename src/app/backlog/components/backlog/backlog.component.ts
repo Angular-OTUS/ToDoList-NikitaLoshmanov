@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {Observable} from "rxjs";
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Observable, Subject, takeUntil} from "rxjs";
 import {Task} from "../../../shared/model/task";
 import {ToastService} from "../../../shared/services/toast/toast.service";
 import {PathParamSharedService} from "../../../shared/services/pathParam/path-param-shared.service";
@@ -15,10 +15,11 @@ import {TaskStoreService} from "../../../shared/services/store/task-store.servic
   templateUrl: './backlog.component.html',
   styleUrls: ['./backlog.component.scss'],
 })
-export class BacklogComponent implements OnInit{
+export class BacklogComponent  implements OnInit, OnDestroy {
   headerText = 'Backlog'
   tasks$: Observable<Task[]>;
   selectedId: number | null = null;
+  private destroyed$ = new Subject<void>();
 
   constructor(
     private toastService: ToastService,
@@ -31,8 +32,13 @@ export class BacklogComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.pathParamService.onRequestIdParam
-      .subscribe(id => this.selectedId = id);
+    this.pathParamService.onRequestIdParam.pipe(
+      takeUntil(this.destroyed$),
+    ).subscribe(id => this.selectedId = id);
+  }
+
+  ngOnDestroy(): void {
+    this.destroyed$.next();
   }
 
   addTask(task: Task) {

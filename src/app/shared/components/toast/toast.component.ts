@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Toast} from "../../model/toast";
 import {ToastService} from "../../services/toast/toast.service";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-toast',
@@ -8,7 +9,7 @@ import {ToastService} from "../../services/toast/toast.service";
   styleUrls: ['./toast.component.scss'],
 })
 export class ToastComponent implements OnInit {
-  toast: Toast | undefined;
+  toast$: Observable<Toast | undefined> | undefined;
 
   public close(toast: Toast) {
     this.toastService.hide(toast);
@@ -18,10 +19,12 @@ export class ToastComponent implements OnInit {
     private toastService: ToastService,
   ) {}
 
+  getToast() {
+    return this.toastService.getToast()
+  }
+
   ngOnInit(): void {
-    this.toastService.getToast().subscribe((toast) => {
-      this.toast = toast;
-    });
+    this.toast$ = this.toastService.getToast();
   }
 
 }
