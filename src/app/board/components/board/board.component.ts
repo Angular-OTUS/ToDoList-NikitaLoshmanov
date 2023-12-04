@@ -11,7 +11,7 @@ import {CdkDragDrop, moveItemInArray, transferArrayItem} from "@angular/cdk/drag
   styleUrls: ['./board.component.scss'],
 })
 export class BoardComponent {
-  headerText = 'Board'
+  headerText = $localize`:header|header text:Board`;
   tasks$: Observable<Task[]>;
   todoTasks: Task[] = [];
   inProgressTasks: Task[] = [];

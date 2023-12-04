@@ -1,13 +1,15 @@
-<app-header [header]="headerText"></app-header>
+<app-header [header]="headerText">
+  <app-locale></app-locale>
+</app-header>
 <div class="wrap">
   <div class="col-3">
     <button type="button"
             class="btn btn-outline-secondary d-block m-auto"
-            [appTooltip]="'Click to start adding your new task'"
+            matTooltip="Click to start adding your new task"
             (click)="openDialog()"
-    >
-      Add task
-    </button>
+            i18n
+            i18n-matTooltip
+    >Add task</button>
     <ng-container *ngIf="tasks$ | async as tasks">
       <app-task *ngFor="let task of tasks"
                            [task]="task"

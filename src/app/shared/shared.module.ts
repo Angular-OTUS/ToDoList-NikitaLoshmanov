@@ -19,6 +19,9 @@ import {AddEditDialogComponent} from "./components/dialog/add-edit-dialog/add-ed
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatSelectModule} from "@angular/material/select";
 import {CdkDragHandle} from "@angular/cdk/drag-drop";
+import {MatTooltipModule} from "@angular/material/tooltip";
+import {MatListModule} from "@angular/material/list";
+import {LocaleComponent} from './components/locale/locale.component';
 
 
 @NgModule({
@@ -32,21 +35,24 @@ import {CdkDragHandle} from "@angular/cdk/drag-drop";
       TaskDetailsComponent,
       ToastComponent,
       AddEditDialogComponent,
+      LocaleComponent,
   ],
-  imports: [
-    CommonModule,
-    MatProgressSpinnerModule,
-    MatCheckboxModule,
-    FormsModule,
-    MatInputModule,
-    MatCardModule,
-    ReactiveFormsModule,
-    MatButtonModule,
-    MatIconModule,
-    MatDialogModule,
-    MatSelectModule,
-    CdkDragHandle,
-  ],
+    imports: [
+        CommonModule,
+        MatProgressSpinnerModule,
+        MatCheckboxModule,
+        FormsModule,
+        MatInputModule,
+        MatCardModule,
+        ReactiveFormsModule,
+        MatButtonModule,
+        MatIconModule,
+        MatDialogModule,
+        MatSelectModule,
+        CdkDragHandle,
+        MatTooltipModule,
+        MatListModule,
+    ],
   exports: [
     CommonModule,
     ButtonComponent,
@@ -58,6 +64,7 @@ import {CdkDragHandle} from "@angular/cdk/drag-drop";
     TaskDetailsComponent,
     ToastComponent,
     AddEditDialogComponent,
+    LocaleComponent,
   ],
 })
 export class SharedModule { }

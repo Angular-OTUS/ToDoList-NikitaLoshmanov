@@ -1,0 +1,10 @@
+<div>
+  <mat-form-field>
+    <mat-select [(ngModel)]="defaultCode" [placeholder]="defaultLabel">
+      <mat-option *ngFor="let locale of localesList" [value]="locale.label">
+        <a href="/{{locale.code}}/">{{ locale.label }}</a>
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+

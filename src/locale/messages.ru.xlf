@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en-US" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="5592578901617940606" datatype="html">
+        <source>Click to start adding your new task</source>
+        <target>Нажмите, чтобы добавить новую задачу</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/backlog/components/backlog/backlog.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6649386542043268895" datatype="html">
+        <source>Add task</source>
+        <target>Добавить задачу</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/backlog/components/backlog/backlog.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5194912054053114732" datatype="html">
+        <source>Backlog</source>
+        <target>Список задач</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/backlog/components/backlog/backlog.component.ts</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+        <note priority="1" from="description">header text</note>
+      </trans-unit>
+      <trans-unit id="8389419680107105248" datatype="html">
+        <source>TO DO</source>
+        <target>СДЕЛАТЬ</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/board/components/board/board.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8111277758583679220" datatype="html">
+        <source>IN PROGRESS</source>
+        <target>В ПРОЦЕССЕ</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/board/components/board/board.component.html</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2312076048705890765" datatype="html">
+        <source>DONE</source>
+        <target>ЗАВЕРШЕНО</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/board/components/board/board.component.html</context>
+          <context context-type="linenumber">39</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7342837363445553204" datatype="html">
+        <source>Board</source>
+        <target>Доска</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/board/components/board/board.component.ts</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+        <note priority="1" from="description">header text</note>
+        <note priority="1" from="meaning">header</note>
+      </trans-unit>
+      <trans-unit id="4238208757054517030" datatype="html">
+        <source>Backlog</source>
+        <target>Список</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/task-board/task-board.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+        <note priority="1" from="description">backlog</note>
+        <note priority="1" from="meaning">side nav</note>
+      </trans-unit>
+      <trans-unit id="4006787866186940432" datatype="html">
+        <source>Board</source>
+        <target>Доска</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/task-board/task-board.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+        <note priority="1" from="description">board</note>
+        <note priority="1" from="meaning">side nav</note>
+      </trans-unit>
+      <trans-unit id="114816039455039903" datatype="html">
+        <source>Task Details</source>
+        <target>Детали задачи</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/components/dialog/add-edit-dialog/add-edit-dialog.component.html</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3655559090196407008" datatype="html">
+        <source>Short task</source>
+        <target>Краткое описание</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/components/dialog/add-edit-dialog/add-edit-dialog.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2672105644379929193" datatype="html">
+        <source>Task is required</source>
+        <target>Задача обязательна</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/components/dialog/add-edit-dialog/add-edit-dialog.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2179291586816045616" datatype="html">
+        <source>Task details</source>
+        <target>Описание задачи</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/components/dialog/add-edit-dialog/add-edit-dialog.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5701779805166837861" datatype="html">
+        <source>Status is required</source>
+        <target>Статус обязателен</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/components/dialog/add-edit-dialog/add-edit-dialog.component.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3768927257183755959" datatype="html">
+        <source>Save</source>
+        <target>Сохранить</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/components/dialog/add-edit-dialog/add-edit-dialog.component.html</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2159130950882492111" datatype="html">
+        <source>Cancel</source>
+        <target>Отменить</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/components/dialog/add-edit-dialog/add-edit-dialog.component.html</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7848679247606200934" datatype="html">
+        <source>Click to see description</source>
+        <target>Нажмите, чтобы посмотреть описание</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/components/task/task.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5726691094023644029" datatype="html">
+        <source>Edit task</source>
+        <target>Редактировать задачу</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/components/task/task.component.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4510676848705799339" datatype="html">
+        <source>Delete task</source>
+        <target>Удалить задачу</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/components/task/task.component.html</context>
+          <context context-type="linenumber">22</context>
+        </context-group>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

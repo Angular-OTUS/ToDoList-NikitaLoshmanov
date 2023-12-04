@@ -16,7 +16,7 @@ import {TaskStoreService} from "../../../shared/services/store/task-store.servic
   styleUrls: ['./backlog.component.scss'],
 })
 export class BacklogComponent  implements OnInit, OnDestroy {
-  headerText = 'Backlog'
+  headerText = $localize`:header text:Backlog`;
   tasks$: Observable<Task[]>;
   selectedId: number | null = null;
   private destroyed$ = new Subject<void>();

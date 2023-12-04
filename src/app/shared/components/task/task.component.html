@@ -5,19 +5,22 @@
 
     <div class="col h-100 fs-5"
          (click)="goToTaskDetails(task)"
-         [appTooltip]="'Click to see description'">
+         matTooltip="Click to see description"
+         i18n-matTooltip>
       {{task.text}}
     </div>
 
     <div class="col-3">
       <div class="float-end d-flex">
         <button mat-icon-button class="p-0"
-                [appTooltip]="'Edit task'"
+                matTooltip="Edit task"
+                i18n-matTooltip
                 (click)="openDialog(task)">
           <mat-icon>edit</mat-icon>
         </button>
         <button mat-icon-button class="p-0"
-                [appTooltip]="'Delete task'"
+                matTooltip="Delete task"
+                i18n-matTooltip
                 (click)="deleteItem(task.id)">
           <mat-icon>delete</mat-icon>
         </button>
