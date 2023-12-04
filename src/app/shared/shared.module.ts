@@ -20,6 +20,8 @@ import {MatDialogModule} from "@angular/material/dialog";
 import {MatSelectModule} from "@angular/material/select";
 import {CdkDragHandle} from "@angular/cdk/drag-drop";
 import {MatTooltipModule} from "@angular/material/tooltip";
+import {MatListModule} from "@angular/material/list";
+import {LocaleComponent} from './components/locale/locale.component';
 
 
 @NgModule({
@@ -33,6 +35,7 @@ import {MatTooltipModule} from "@angular/material/tooltip";
       TaskDetailsComponent,
       ToastComponent,
       AddEditDialogComponent,
+      LocaleComponent,
   ],
     imports: [
         CommonModule,
@@ -48,6 +51,7 @@ import {MatTooltipModule} from "@angular/material/tooltip";
         MatSelectModule,
         CdkDragHandle,
         MatTooltipModule,
+        MatListModule,
     ],
   exports: [
     CommonModule,
@@ -60,6 +64,7 @@ import {MatTooltipModule} from "@angular/material/tooltip";
     TaskDetailsComponent,
     ToastComponent,
     AddEditDialogComponent,
+    LocaleComponent,
   ],
 })
 export class SharedModule { }
